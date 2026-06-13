@@ -1,0 +1,64 @@
+{
+  "id": "0be0be3a",
+  "phase": "generate_requested",
+  "pageUrl": "/about",
+  "sourceFile": null,
+  "expectedVariants": 2,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {},
+  "pendingEventSeq": 2,
+  "pendingEvent": {
+    "type": "generate",
+    "id": "0be0be3a",
+    "action": "layout",
+    "freeformPrompt": "make the hero fit",
+    "count": 2,
+    "pageUrl": "/about",
+    "element": {
+      "tagName": "section",
+      "id": null,
+      "classes": [
+        "relative",
+        "flex",
+        "items-end"
+      ],
+      "textContent": "Fourteen years on the other side.NOW CHRIS SCOTT IS ON YOUR SIDESCHEDULE A CALL ›↓",
+      "outerHTML": "<section class=\"relative flex items-end\" style=\"min-height: 100vh; background-image: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url(&quot;/images/chris-scott-commanders.jpg&quot;); background-size: cover; background-position: center center; background-repeat: no-repeat; padding-bottom: clamp(4rem, 8vh, 8rem);\"><div class=\"container-lg w-full\"><div class=\"max-w-4xl\" style=\"opacity: 1; transform: none;\"><div class=\"divider-gold mb-6\" style=\"margin-left: 0px;\"></div><h1 class=\"hero-headline--about\" style=\"font-family: var(--font-editorial); font-weight: 400; line-height: 0.95; letter-spacing: -0.02em; color: var(--text-primary); margin-bottom: clamp(1.5rem, 3vh, 2.5rem);\">Fourteen years on the <em style=\"font-style: italic; color: var(--accent-maroon);\">other</em> side.</h1><p style=\"font-family: var(--font-body); font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: clamp(2rem, 4vh, 3rem);\">NOW CHRIS SCOTT IS ON YOUR SIDE</p><a class=\"btn-primary inline-block\" href=\"/book-a-call\" style=\"padding: 1rem 2rem; font-size: 0.875rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; text-decoration: none;\">SCHEDULE A CALL ›</a></div></div><div class=\"absolute\" style=\"bottom: 2rem; right: 2rem; font-size: 1.5rem; color: var(--text-primary); opacity: 0.5; transform: translateY(1.1912px);\">↓</div></section>",
+      "computedStyles": {
+        "font-family": "Inter, \"Inter Fallback\", -apple-system, \"system-ui\", \"Segoe UI\", sans-serif",
+        "font-size": "16px",
+        "font-weight": "400",
+        "line-height": "25.6px",
+        "color": "lab(7.25373 1.57871 6.11279)",
+        "background": "linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)) no-repeat scroll 50% 50% / cover padding-box border-box, rgba(0, 0, 0, 0) url(\"http://localhost:3000/images/chris-scott-commanders.jpg\") no-repeat scroll 50% 50% / cover padding-box border-box",
+        "background-color": "rgba(0, 0, 0, 0)",
+        "padding": "0px 0px 79.36px",
+        "margin": "0px",
+        "display": "flex",
+        "position": "relative",
+        "gap": "normal",
+        "border-radius": "0px",
+        "box-shadow": "none"
+      },
+      "cssCustomProperties": {
+        "--font-bebas-neue": "\"Bebas Neue\", \"Bebas Neue Fallback\"",
+        "--font-inter": "\"Inter\", \"Inter Fallback\"",
+        "--font-playfair": "\"Playfair Display\", \"Playfair Display Fallback\""
+      },
+      "parentContext": "<div>",
+      "boundingRect": {
+        "width": 1540,
+        "height": 992
+      }
+    }
+  },
+  "deliveryLease": null,
+  "checkpointRevision": 1,
+  "activeOwner": "cbf63f6c",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-16T01:02:27.400Z"
+}

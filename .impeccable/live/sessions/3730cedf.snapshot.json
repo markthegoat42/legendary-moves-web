@@ -1,0 +1,60 @@
+{
+  "id": "3730cedf",
+  "phase": "generate_requested",
+  "pageUrl": "/about",
+  "sourceFile": null,
+  "expectedVariants": 2,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {},
+  "pendingEventSeq": 2,
+  "pendingEvent": {
+    "type": "generate",
+    "id": "3730cedf",
+    "action": "layout",
+    "freeformPrompt": "I want this horizontal across this page",
+    "count": 2,
+    "pageUrl": "/about",
+    "element": {
+      "tagName": "h3",
+      "id": null,
+      "classes": [],
+      "textContent": "Parents need someone who's been in the room.",
+      "outerHTML": "<h3 style=\"font-family:var(--font-editorial);font-size:clamp(2rem, 4vw, 3.25rem);font-weight:400;line-height:1.1;color:var(--text-on-dark);max-width:800px\">Parents need someone who's been in the room.</h3>",
+      "computedStyles": {
+        "font-family": "\"Playfair Display\", \"Playfair Display Fallback\", Georgia, serif",
+        "font-size": "52px",
+        "font-weight": "400",
+        "line-height": "57.2px",
+        "color": "lab(97.68 -0.0000298023 0.0000119209)",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "background-color": "rgba(0, 0, 0, 0)",
+        "padding": "0px",
+        "margin": "0px",
+        "display": "block",
+        "position": "static",
+        "gap": "normal",
+        "border-radius": "0px",
+        "box-shadow": "none"
+      },
+      "cssCustomProperties": {
+        "--font-bebas-neue": "\"Bebas Neue\", \"Bebas Neue Fallback\"",
+        "--font-inter": "\"Inter\", \"Inter Fallback\"",
+        "--font-playfair": "\"Playfair Display\", \"Playfair Display Fallback\""
+      },
+      "parentContext": "<div>",
+      "boundingRect": {
+        "width": 203,
+        "height": 400
+      }
+    }
+  },
+  "deliveryLease": null,
+  "checkpointRevision": 1,
+  "activeOwner": "8407f997",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-15T22:48:30.428Z"
+}

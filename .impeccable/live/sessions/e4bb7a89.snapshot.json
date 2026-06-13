@@ -1,0 +1,171 @@
+{
+  "id": "e4bb7a89",
+  "phase": "generate_requested",
+  "pageUrl": "/about",
+  "sourceFile": null,
+  "expectedVariants": 3,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {},
+  "pendingEventSeq": 2,
+  "pendingEvent": {
+    "type": "generate",
+    "id": "e4bb7a89",
+    "action": "polish",
+    "count": 3,
+    "pageUrl": "/about",
+    "element": {
+      "tagName": "h3",
+      "id": null,
+      "classes": [],
+      "textContent": "The system is built for schools and brands.",
+      "outerHTML": "<h3 style=\"font-family:var(--font-editorial);font-size:clamp(2rem, 4vw, 3.25rem);font-weight:400;line-height:1.1;color:var(--text-on-dark);max-width:800px\">The system is built for schools and brands.</h3>",
+      "computedStyles": {
+        "font-family": "\"Playfair Display\", \"Playfair Display Fallback\", Georgia, serif",
+        "font-size": "52px",
+        "font-weight": "400",
+        "line-height": "57.2px",
+        "color": "lab(97.68 -0.0000298023 0.0000119209)",
+        "background": "rgba(0, 0, 0, 0) none repeat scroll 0% 0% / auto padding-box border-box",
+        "background-color": "rgba(0, 0, 0, 0)",
+        "padding": "0px",
+        "margin": "0px",
+        "display": "block",
+        "position": "static",
+        "gap": "normal",
+        "border-radius": "0px",
+        "box-shadow": "none"
+      },
+      "cssCustomProperties": {
+        "--font-bebas-neue": "\"Bebas Neue\", \"Bebas Neue Fallback\"",
+        "--font-inter": "\"Inter\", \"Inter Fallback\"",
+        "--font-playfair": "\"Playfair Display\", \"Playfair Display Fallback\""
+      },
+      "parentContext": "<div>",
+      "boundingRect": {
+        "width": 169,
+        "height": 400
+      }
+    },
+    "strokes": [
+      {
+        "points": [
+          [
+            150.390625,
+            377.95703125
+          ],
+          [
+            143.73046875,
+            381.91015625
+          ],
+          [
+            139.09375,
+            384.76953125
+          ],
+          [
+            134.48828125,
+            387.64453125
+          ],
+          [
+            130.03515625,
+            390.4453125
+          ],
+          [
+            125.515625,
+            393.3671875
+          ],
+          [
+            121.5,
+            395.8046875
+          ],
+          [
+            118.04296875,
+            397.93359375
+          ],
+          [
+            114.99609375,
+            399.796875
+          ],
+          [
+            112.1171875,
+            401.22265625
+          ],
+          [
+            109.26953125,
+            402.64453125
+          ],
+          [
+            106.3203125,
+            403.9140625
+          ],
+          [
+            103.10546875,
+            405.04296875
+          ],
+          [
+            99.84375,
+            406.1796875
+          ],
+          [
+            96.73828125,
+            407.1796875
+          ],
+          [
+            94.21875,
+            407.9453125
+          ],
+          [
+            92.4375,
+            408.5859375
+          ],
+          [
+            91.0546875,
+            409.17578125
+          ],
+          [
+            89.64453125,
+            409.640625
+          ],
+          [
+            88.03125,
+            409.984375
+          ],
+          [
+            86.65234375,
+            410.30859375
+          ],
+          [
+            85.50390625,
+            410.625
+          ],
+          [
+            84.62109375,
+            410.984375
+          ],
+          [
+            83.453125,
+            411.2109375
+          ],
+          [
+            80.02734375,
+            410.80859375
+          ]
+        ]
+      }
+    ],
+    "screenshotPath": "/Users/markmcneil/Desktop/Sports Management Website/legendary-moves-web/.impeccable/live/annotations/session-URz3Yu/e4bb7a89.png"
+  },
+  "deliveryLease": null,
+  "checkpointRevision": 1,
+  "activeOwner": "06cb78bd",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [
+    {
+      "type": "screenshot",
+      "path": "/Users/markmcneil/Desktop/Sports Management Website/legendary-moves-web/.impeccable/live/annotations/session-URz3Yu/e4bb7a89.png"
+    }
+  ],
+  "diagnostics": [],
+  "updatedAt": "2026-05-15T22:51:09.078Z"
+}

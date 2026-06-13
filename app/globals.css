@@ -1,26 +1,396 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Color Palette - Championship Edition v3: Cream + Navy + Maroon + Gold */
+
+  /* Primary palette - warm cream canvas */
+  --bg-primary: oklch(97% 0.012 80);              /* Warm cream - default background */
+  --bg-punctuation: oklch(22% 0.06 250);          /* Deep navy - punctuation sections */
+  --bg-accent: oklch(35% 0.14 22);                /* Maroon - accent surfaces */
+
+  /* Text colors */
+  --text-primary: oklch(20% 0.02 80);             /* Charcoal - body text */
+  --text-on-dark: oklch(98% 0 0);                 /* Near-white - text on dark backgrounds */
+  --text-muted: oklch(50% 0.015 80);              /* Subdued - secondary text */
+
+  /* Accent colors */
+  --accent-gold: oklch(70% 0.10 80);              /* Antique gold - typography & rules only */
+  --accent-maroon: oklch(35% 0.14 22);            /* Maroon - typography emphasis */
+
+  /* Legacy semantic colors (preserved for backwards compatibility) */
+  --color-accent-red: oklch(35% 0.14 22);        /* Maroon - deeper, more sophisticated */
+  --color-accent-red-hover: oklch(30% 0.14 22);  /* Slightly darker maroon for hover */
+  --color-accent-gold: oklch(70% 0.10 80);       /* Antique gold - micro-accent only */
+  --color-navy: oklch(22% 0.06 250);             /* Navy - dark section backgrounds */
+  --color-charcoal: oklch(20% 0.01 265);         /* Charcoal - body text and form borders only */
+  --color-white: oklch(99% 0.005 265);           /* Dominant background */
+
+  /* Legacy neutral palette (preserved) */
+  --color-black: oklch(20% 0 0);
+  --color-gray-50: oklch(98% 0 0);
+  --color-gray-100: oklch(96% 0 0);
+  --color-gray-300: oklch(85% 0 0);
+  --color-gray-600: oklch(55% 0 0);
+  --color-gray-900: oklch(25% 0 0);
+  --color-crimson: oklch(50% 0.20 25);
+  --color-gold: oklch(70% 0.12 85);
+
+  /* Font Families - Editorial Pairing */
+  --font-display: var(--font-bebas-neue);  /* Bold, condensed, athletic */
+  --font-body: var(--font-inter);           /* Clean, readable, modern */
+  --font-editorial: var(--font-playfair), Georgia, serif;  /* Editorial headlines with italic emphasis */
+
+  /* Modular Type Scale - Bumped for 40+ readability */
+  /* Body sizes increased for better legibility for parents/coaches */
+  --font-size-xs: 1rem;                                      /* 16px - labels, captions (was 12.8px) */
+  --font-size-sm: 1.0625rem;                                 /* 17px - small caps labels (was 14px) */
+  --font-size-base: 1.25rem;                                 /* 20px - body text (was 16px) */
+  --font-size-lg: 1.375rem;                                  /* 22px - lead paragraphs (was 18px) */
+  --font-size-xl: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);   /* 20-24px - subheadings */
+  --font-size-2xl: clamp(1.5rem, 1.2rem + 1vw, 2rem);       /* 24-32px - small headings */
+  --font-size-3xl: clamp(2rem, 1.5rem + 1.5vw, 3rem);       /* 32-48px - medium headings */
+  --font-size-4xl: clamp(2.5rem, 1.75rem + 2.5vw, 4rem);    /* 40-64px - large headings */
+  --font-size-5xl: clamp(3.5rem, 2rem + 4vw, 6rem);         /* 56-96px - hero headings */
+  --font-size-6xl: clamp(4rem, 2.5rem + 5vw, 8rem);         /* 64-128px - display */
+
+  /* Spacing Scale - Rhythm through Contrast */
+  /* Tight grouping for related elements, generous separation between sections */
+  --space-2xs: 0.25rem;                               /* 4px - micro spacing */
+  --space-xs: 0.5rem;                                 /* 8px - tight grouping */
+  --space-sm: 0.75rem;                                /* 12px - related elements */
+  --space-md: 1rem;                                   /* 16px - standard gap */
+  --space-lg: 1.5rem;                                 /* 24px - section padding */
+  --space-xl: 2rem;                                   /* 32px - between components */
+  --space-2xl: clamp(3rem, 2rem + 3vw, 5rem);        /* 48-80px - section separation */
+  --space-3xl: clamp(4rem, 3rem + 4vw, 7rem);        /* 64-112px - major sections */
+  --space-4xl: clamp(6rem, 4rem + 6vw, 10rem);       /* 96-160px - page sections */
+
+  /* Container */
+  --container-max: 75rem;    /* 1200px */
+  --text-max: 43.75rem;      /* 700px */
+
+  /* Transitions */
+  --transition-fast: 150ms ease-out;
+  --transition-base: 250ms ease-out;
+  --transition-slow: 350ms ease-out;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  background-color: var(--bg-primary);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body), -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: var(--font-size-base);
+  line-height: 1.6;
+  font-kerning: normal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display), sans-serif;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-charcoal);
+  letter-spacing: -0.02em; /* Tighter tracking for large display text */
+}
+
+/* Typography Utilities - Clear Hierarchy with Proper Contrast */
+.heading-xl {
+  font-family: var(--font-display);
+  font-size: var(--font-size-6xl);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+}
+
+.heading-lg {
+  font-family: var(--font-display);
+  font-size: var(--font-size-5xl);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.heading-md {
+  font-family: var(--font-display);
+  font-size: var(--font-size-4xl);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.heading-sm {
+  font-family: var(--font-display);
+  font-size: var(--font-size-3xl);
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.body-lg {
+  font-family: var(--font-body);
+  font-size: var(--font-size-lg);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 65ch; /* Optimal reading line length */
+}
+
+.body-base {
+  font-family: var(--font-body);
+  font-size: var(--font-size-base);
+  font-weight: 400;
+  line-height: 1.6;
+  max-width: 70ch; /* Editorial readability width for deep pages */
+}
+
+/* Container - Responsive Spacing */
+.container-lg {
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 3vw, 2rem);  /* Fluid horizontal padding */
+  padding-right: clamp(1rem, 3vw, 2rem);
+}
+
+.text-container {
+  max-width: var(--text-max);
+  max-width: 65ch; /* Character-based width for optimal reading */
+}
+
+/* Button Base Styles */
+.btn {
+  display: inline-block;
+  padding: 1rem 2rem; /* Increased to ensure 44px minimum touch target */
+  min-height: 44px; /* WCAG minimum touch target size */
+  font-family: var(--font-body);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  text-align: center;
+  text-decoration: none;
+  border: 2px solid transparent;
+  border-radius: 0;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn-primary {
+  background: var(--color-accent-red);
+  color: var(--color-white);
+  border-color: var(--color-accent-red);
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-red-hover);
+  color: var(--color-white);
+  border-color: var(--color-accent-red-hover);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--color-charcoal);
+  border-color: var(--color-charcoal);
+}
+
+.btn-outline:hover {
+  background: var(--color-charcoal);
+  color: var(--color-white);
+}
+
+/* Remove default focus rings, add custom */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-charcoal);
+  outline-offset: 4px;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Editorial Drop Caps - Playfair Display */
+.drop-cap::first-letter {
+  font-family: var(--font-editorial);
+  font-size: 4em;
+  font-weight: 400;
+  line-height: 0.85;
+  float: left;
+  margin-right: 0.125rem;
+  margin-top: 0.1em;
+  color: var(--accent-maroon);
+}
+
+/* Section Background Utilities */
+.section--cream {
+  background: var(--bg-primary);
+  color: var(--text-primary);
+}
+
+.section--navy {
+  background: var(--bg-punctuation);
+  color: var(--text-on-dark);
+}
+
+.section--maroon {
+  background: var(--bg-accent);
+  color: var(--text-on-dark);
+}
+
+/* Gold Divider */
+.divider-gold {
+  width: 80px;
+  height: 1px;
+  background: var(--accent-gold);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Typography Utilities - Cream Palette */
+.text-italic-maroon {
+  font-family: var(--font-editorial);
+  font-style: italic;
+  color: var(--accent-maroon);
+}
+
+.text-smallcaps-maroon {
+  font-family: var(--font-editorial);
+  font-variant: small-caps;
+  color: var(--accent-maroon);
+}
+
+.credential-tag-gold {
+  font-family: var(--font-body);
+  font-variant: small-caps;
+  color: var(--accent-gold);
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* About Page Hero - Larger Headline */
+.hero-headline--about {
+  font-size: 200px; /* Desktop */
+}
+
+@media (max-width: 1279px) {
+  .hero-headline--about {
+    font-size: 160px; /* Tablet */
+  }
+}
+
+@media (max-width: 767px) {
+  .hero-headline--about {
+    font-size: 96px; /* Mobile */
+  }
+}
+
+/* Mobile typography adjustments */
+@media (max-width: 640px) {
+  body {
+    font-size: 1.125rem; /* 18px on mobile (vs 20px desktop) */
+  }
+}
+
+/* Navigation logo responsive sizing */
+.nav-logo {
+  height: 48px;
+  width: auto;
+  max-height: 48px;
+  margin-right: 0;
+  display: block;
+}
+
+@media (max-width: 1023px) {
+  .nav-logo {
+    height: 40px;
+    max-height: 40px;
+  }
+}
+
+@media (max-width: 767px) {
+  .nav-logo {
+    height: 32px;
+    max-height: 32px;
+  }
+}
+
+/* Accessibility: Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Legal pages - readable prose */
+.legal-content {
+  max-width: 760px;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+}
+
+.legal-content h2 {
+  font-family: var(--font-display);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-charcoal);
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+}
+
+.legal-content h3 {
+  font-family: var(--font-body);
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-charcoal);
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.legal-content p {
+  margin-bottom: 1rem;
+}
+
+.legal-content ul {
+  margin: 0 0 1rem 1.5rem;
+  list-style: disc;
+}
+
+.legal-content li {
+  margin-bottom: 0.5rem;
+}
+
+.legal-content a {
+  color: var(--accent-maroon);
+  text-decoration: underline;
+}
+
+.legal-content strong {
+  font-weight: 700;
+  color: var(--color-charcoal);
+}
+
+.legal-content .legal-intro {
+  font-size: var(--font-size-lg);
+  color: var(--text-muted);
+  margin-bottom: 2rem;
 }

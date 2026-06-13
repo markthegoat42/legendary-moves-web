@@ -1,0 +1,20 @@
+{
+  "id": "b514cdb7",
+  "phase": "variants_ready",
+  "pageUrl": "/",
+  "sourceFile": "app/about/page.tsx",
+  "expectedVariants": 3,
+  "arrivedVariants": 0,
+  "visibleVariant": 0,
+  "paramValues": {},
+  "pendingEventSeq": null,
+  "pendingEvent": null,
+  "deliveryLease": null,
+  "checkpointRevision": 1,
+  "activeOwner": "a8bd148d",
+  "sourceMarkers": {},
+  "fallbackMode": null,
+  "annotationArtifacts": [],
+  "diagnostics": [],
+  "updatedAt": "2026-05-09T20:40:45.612Z"
+}

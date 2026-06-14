@@ -7,24 +7,64 @@ import Image from 'next/image';
 export default function SuccessStoriesPage() {
   // TODO: Verify image rights with LSU and Charlotte athletic departments before deploying.
   // Replace with original photography or licensed assets if needed.
+  // `contain: true` shows the full graphic uncropped (for team/draft graphics with
+  // side panels); `contain: false` crops a clean photo to fill the card.
   const players = [
     {
       name: "Jakolby Jones",
       image: "/players/jakolby-jones.jpg",
       meta: "OL · LSU · Many, LA",
       note: "Signed with LSU.",
+      contain: false,
     },
     {
       name: "Chance Williams",
       image: "/players/chance-williams.jpg",
       meta: "RB · Charlotte · Cincinnati, OH",
       note: "Signed with Charlotte.",
+      contain: false,
     },
     {
       name: "Charles Bassey",
       image: "/players/charles-bassey.webp",
       meta: "Center · San Antonio Spurs · Lagos, Nigeria",
       note: "Re-signed.",
+      contain: false,
+    },
+    {
+      name: "Tank Dell",
+      image: "/players/tank-dell.jpg",
+      meta: "WR · Houston Texans · Univ. of Houston",
+      note: "Drafted by Houston.",
+      contain: true,
+    },
+    {
+      name: "Damarion Williams",
+      image: "/players/damarion-williams.jpg",
+      meta: "CB · Baltimore Ravens · Univ. of Houston",
+      note: "2022 Draft · Round 4, Pick 141.",
+      contain: true,
+    },
+    {
+      name: "Patrick Paul",
+      image: "/players/patrick-paul.jpg",
+      meta: "OT · Miami Dolphins · Univ. of Houston",
+      note: "Round 2, Pick 55.",
+      contain: true,
+    },
+    {
+      name: "Marcus Jones",
+      image: "/players/marcus-jones.jpg",
+      meta: "CB · New England Patriots · Univ. of Houston",
+      note: "AFC Defensive Player of the Month.",
+      contain: true,
+    },
+    {
+      name: "Danny Johnson",
+      image: "/players/danny-johnson.jpg",
+      meta: "CB · Washington Commanders · Southern University",
+      note: "Re-signed.",
+      contain: true,
     },
   ];
 
@@ -154,6 +194,7 @@ export default function SuccessStoriesPage() {
                     className="relative overflow-hidden"
                     style={{
                       aspectRatio: '4/5',
+                      backgroundColor: player.contain ? 'var(--color-charcoal)' : undefined,
                     }}
                   >
                     <div
@@ -176,7 +217,7 @@ export default function SuccessStoriesPage() {
                         fill
                         sizes="(max-width: 768px) 100vw, 33vw"
                         style={{
-                          objectFit: 'cover',
+                          objectFit: player.contain ? 'contain' : 'cover',
                           objectPosition: player.name === 'Charles Bassey' ? 'center top' : 'center'
                         }}
                       />

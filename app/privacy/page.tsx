@@ -7,12 +7,12 @@ export const metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <LegalPage title="Privacy Policy" lastUpdated="[EFFECTIVE DATE]">
+    <LegalPage title="Privacy Policy" lastUpdated="June 12, 2026">
       <p className="legal-intro">
         This Privacy Policy explains how Legendary Moves (&ldquo;Legendary Moves,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo;
         or &ldquo;our&rdquo;) collects, uses, and shares information when you visit mylegendarymoves.com (the
         &ldquo;Site&rdquo;) or register for our Recruiting &amp; Player Development Symposium and related services (the
-        &ldquo;Services&rdquo;). Legendary Moves is a sole proprietorship operated by [OWNER LEGAL NAME] and based in
+        &ldquo;Services&rdquo;). Legendary Moves is a sole proprietorship operated by Chris Scott and based in
         Texas.
       </p>
 

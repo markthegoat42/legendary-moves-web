@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function Disclaimer() {
   return (
-    <LegalPage title="Disclaimer" lastUpdated="[EFFECTIVE DATE]">
+    <LegalPage title="Disclaimer" lastUpdated="June 12, 2026">
       <p className="legal-intro">
         Legendary Moves provides education and guidance for student-athletes and their families. The information and
         services we offer are for general educational purposes. Please read this Disclaimer carefully before relying on

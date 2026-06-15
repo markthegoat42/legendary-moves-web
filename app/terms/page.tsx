@@ -7,11 +7,11 @@ export const metadata = {
 
 export default function TermsOfUse() {
   return (
-    <LegalPage title="Terms of Use" lastUpdated="[EFFECTIVE DATE]">
+    <LegalPage title="Terms of Use" lastUpdated="June 12, 2026">
       <p className="legal-intro">
         These Terms of Use (&ldquo;Terms&rdquo;) govern your access to and use of mylegendarymoves.com (the
         &ldquo;Site&rdquo;) and the services offered by Legendary Moves (&ldquo;Legendary Moves,&rdquo; &ldquo;we,&rdquo;
-        &ldquo;us,&rdquo; or &ldquo;our&rdquo;), a sole proprietorship operated by [OWNER LEGAL NAME] in Texas. Please
+        &ldquo;us,&rdquo; or &ldquo;our&rdquo;), a sole proprietorship operated by Chris Scott in Texas. Please
         read them carefully.
       </p>
 

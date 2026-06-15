@@ -11,7 +11,7 @@ export const metadata = {
 
 export default function RefundPolicy() {
   return (
-    <LegalPage title="Refund & Cancellation Policy" lastUpdated="[EFFECTIVE DATE]">
+    <LegalPage title="Refund & Cancellation Policy" lastUpdated="June 12, 2026">
       <p className="legal-intro">
         This policy explains refunds, transfers, and cancellations for the Recruiting &amp; Player Development Symposium
         offered by Legendary Moves. By registering and paying, you agree to these terms.

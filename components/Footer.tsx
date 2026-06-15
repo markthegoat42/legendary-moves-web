@@ -65,18 +65,18 @@ export default function Footer() {
             </p>
             <div className="space-y-3">
               <a
-                href="mailto:info@legendarymoves.com"
+                href="mailto:info@mylegendarymoves.com"
                 className="block text-sm hover:opacity-70 transition-opacity"
                 style={{ color: 'var(--color-gray-300)' }}
               >
-                info@legendarymoves.com
+                info@mylegendarymoves.com
               </a>
               <a
-                href="tel:+15551234567"
+                href="tel:+18323918105"
                 className="block text-sm hover:opacity-70 transition-opacity"
                 style={{ color: 'var(--color-gray-300)' }}
               >
-                (555) 123-4567
+                832-391-8105
               </a>
             </div>
           </div>

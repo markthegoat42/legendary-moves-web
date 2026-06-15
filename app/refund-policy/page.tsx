@@ -53,7 +53,7 @@ export default function RefundPolicy() {
 
       <h2>How to Request a Refund or Transfer</h2>
       <p>
-        Email your request to [contact@your-domain.com] with the athlete&rsquo;s name, the city and date you registered
+        Email your request to info@mylegendarymoves.com with the athlete&rsquo;s name, the city and date you registered
         for, and the email used at registration. Approved refunds are issued to the original payment method through
         Stripe and may take several business days to appear, depending on your bank or card issuer.
       </p>
@@ -66,7 +66,7 @@ export default function RefundPolicy() {
       </p>
 
       <h2>Contact Us</h2>
-      <p>Questions about this policy? Contact Legendary Moves at [contact@your-domain.com].</p>
+      <p>Questions about this policy? Contact Legendary Moves at info@mylegendarymoves.com.</p>
     </LegalPage>
   );
 }

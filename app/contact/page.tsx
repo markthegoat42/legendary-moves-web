@@ -116,11 +116,11 @@ export default function ContactPage() {
                 For questions, follow-ups, or sending documents:
               </p>
               <a
-                href="mailto:info@legendarymoves.com"
+                href="mailto:info@mylegendarymoves.com"
                 className="block text-4xl md:text-5xl font-mono font-bold mb-6 hover:opacity-70 transition-opacity"
                 style={{ color: 'var(--color-black)', lineHeight: 1.2 }}
               >
-                info@legendarymoves.com
+                info@mylegendarymoves.com
               </a>
               <p className="body-base text-sm" style={{ color: 'var(--color-gray-600)' }}>
                 We respond within one business day.
@@ -162,11 +162,11 @@ export default function ContactPage() {
                 For urgent situations or if you prefer to talk:
               </p>
               <a
-                href="tel:+15551234567"
+                href="tel:+18323918105"
                 className="block text-4xl md:text-5xl font-mono font-bold mb-6 hover:opacity-70 transition-opacity"
                 style={{ color: 'var(--color-black)', lineHeight: 1.2 }}
               >
-                (555) 123-4567
+                832-391-8105
               </a>
               <p className="body-base text-sm" style={{ color: 'var(--color-gray-600)' }}>
                 Available during business hours, Monday through Friday.

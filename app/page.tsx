@@ -225,9 +225,9 @@ export default function Home() {
           <motion.div
             className="absolute inset-0"
             style={{
-              backgroundImage: 'url(/images/charlesbasseydocriv.jpg)',
+              backgroundImage: 'url(/images/charles-bassey-block.webp)',
               backgroundSize: 'cover',
-              backgroundPosition: 'center',
+              backgroundPosition: 'center 30%',
               scale: 1.0
             }}
             whileHover={{ scale: 1.04 }}

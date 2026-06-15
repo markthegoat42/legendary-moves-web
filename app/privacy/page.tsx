@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
     <LegalPage title="Privacy Policy" lastUpdated="[EFFECTIVE DATE]">
       <p className="legal-intro">
         This Privacy Policy explains how Legendary Moves (&ldquo;Legendary Moves,&rdquo; &ldquo;we,&rdquo; &ldquo;us,&rdquo;
-        or &ldquo;our&rdquo;) collects, uses, and shares information when you visit [your-domain.com] (the
+        or &ldquo;our&rdquo;) collects, uses, and shares information when you visit mylegendarymoves.com (the
         &ldquo;Site&rdquo;) or register for our Recruiting &amp; Player Development Symposium and related services (the
         &ldquo;Services&rdquo;). Legendary Moves is a sole proprietorship operated by [OWNER LEGAL NAME] and based in
         Texas.
@@ -82,7 +82,7 @@ export default function PrivacyPolicy() {
         Our Services involve youth athletes, but they are directed to and intended for use by parents, guardians, and
         adults 18 and older. Registration and payment must be completed by a parent, guardian, or other adult. We do not
         knowingly collect personal information directly from children under 13. If you believe a child under 13 has
-        provided us personal information, please contact us at [contact@your-domain.com] and we will delete it.
+        provided us personal information, please contact us at info@mylegendarymoves.com and we will delete it.
       </p>
 
       <h2>Data Retention</h2>
@@ -103,7 +103,7 @@ export default function PrivacyPolicy() {
         marketing emails at any time using the unsubscribe link or by contacting us. Depending on where you live, you may
         have additional rights under laws such as the California Consumer Privacy Act or the Texas Data Privacy and
         Security Act, including the right to know what we collect and to request deletion. We do not sell personal
-        information. To exercise any right, contact us at [contact@your-domain.com].
+        information. To exercise any right, contact us at info@mylegendarymoves.com.
       </p>
 
       <h2>Third-Party Links</h2>
@@ -121,7 +121,7 @@ export default function PrivacyPolicy() {
 
       <h2>Contact Us</h2>
       <p>
-        Questions about this Policy or your information? Contact Legendary Moves at [contact@your-domain.com].
+        Questions about this Policy or your information? Contact Legendary Moves at info@mylegendarymoves.com.
       </p>
     </LegalPage>
   );

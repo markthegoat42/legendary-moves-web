@@ -6,11 +6,10 @@ import Link from 'next/link';
 
 const MAROON = 'oklch(35% 0.14 22)';
 
-// Registration — Stripe Payment Links for the $50 symposium, one per city.
-// TODO: paste the real Stripe URLs here (they look like https://buy.stripe.com/...).
-// Until then these point at /contact so no button dead-links.
-const REGISTER_HOUSTON = '/contact';
-const REGISTER_DFW = '/contact';
+// Registration — live Ticket Tailor event pages for the $50 symposium (one per city).
+// Payments run through the connected Stripe account.
+const REGISTER_HOUSTON = 'https://buytickets.at/legendarymoves/2266774';
+const REGISTER_DFW = 'https://buytickets.at/legendarymoves/2266814';
 
 // Renders a register button. If the href is an external Stripe link it opens in a
 // new tab; the internal placeholder navigates normally.

@@ -120,15 +120,15 @@ export default function BookACallPage() {
         setIsSuccess(true);
         setLiveRegionMessage('Success! Your call request has been submitted. We will reach out within one business day.');
       } else {
-        const errorMsg = 'Something went wrong. Please try again or email info@legendarymoves.com directly.';
+        const errorMsg = 'Something went wrong. Please try again or email info@mylegendarymoves.com directly.';
         setError(errorMsg);
         setLiveRegionMessage(errorMsg);
       }
     } catch (err) {
       clearTimeout(timeoutId);
-      let errorMsg = 'Something went wrong. Please try again or email info@legendarymoves.com directly.';
+      let errorMsg = 'Something went wrong. Please try again or email info@mylegendarymoves.com directly.';
       if ((err as Error).name === 'AbortError') {
-        errorMsg = 'Request timed out. Please check your connection and try again, or email info@legendarymoves.com directly.';
+        errorMsg = 'Request timed out. Please check your connection and try again, or email info@mylegendarymoves.com directly.';
       }
       setError(errorMsg);
       setLiveRegionMessage(errorMsg);
@@ -531,7 +531,7 @@ export default function BookACallPage() {
                     THANK YOU.
                   </h2>
                   <p className="body-base">
-                    We'll reach out within one business day to schedule your call. If you don't hear back within 24 hours (excluding weekends), email info@legendarymoves.com directly.
+                    We'll reach out within one business day to schedule your call. If you don't hear back within 24 hours (excluding weekends), email info@mylegendarymoves.com directly.
                   </p>
                 </div>
               </div>

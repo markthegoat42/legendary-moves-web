@@ -69,7 +69,7 @@ export default function Disclaimer() {
       </p>
 
       <h2>Contact Us</h2>
-      <p>Questions about this Disclaimer? Contact Legendary Moves at [contact@your-domain.com].</p>
+      <p>Questions about this Disclaimer? Contact Legendary Moves at info@mylegendarymoves.com.</p>
     </LegalPage>
   );
 }

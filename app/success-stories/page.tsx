@@ -9,7 +9,7 @@ export default function SuccessStoriesPage() {
   // Replace with original photography or licensed assets if needed.
   // `contain: true` shows the full graphic uncropped (for team/draft graphics with
   // side panels); `contain: false` crops a clean photo to fill the card.
-  const players = [
+  const players: { name: string; image: string; meta: string; note: string; contain: boolean; blurFill?: boolean }[] = [
     {
       name: "Jakolby Jones",
       image: "/players/jakolby-jones.jpg",
@@ -65,6 +65,42 @@ export default function SuccessStoriesPage() {
       meta: "CB · Washington Commanders · Southern University",
       note: "Re-signed.",
       contain: true,
+    },
+    {
+      name: "Courtland Sutton",
+      image: "/players/courtland-sutton.webp",
+      meta: "WR · Denver Broncos · SMU",
+      note: "2018 Draft · Round 2, Pick 40.",
+      contain: false,
+    },
+    {
+      name: "Rashee Rice",
+      image: "/players/rashee-rice.webp",
+      meta: "WR · Kansas City Chiefs · SMU",
+      note: "2023 Draft · Round 2.",
+      contain: false,
+    },
+    {
+      name: "Elijah Chatman",
+      image: "/players/elijah-chatman.webp",
+      meta: "DT · New York Giants · SMU",
+      note: "Reached the NFL undrafted.",
+      contain: false,
+    },
+    {
+      name: "Jimmy Phillips Jr.",
+      image: "/players/jimmy-phillips.webp",
+      meta: "LB · Green Bay Packers · SMU",
+      note: "Reached the NFL undrafted.",
+      contain: false,
+      blurFill: true,
+    },
+    {
+      name: "Trevor Denbow",
+      image: "/players/trevor-denbow.webp",
+      meta: "S · Indianapolis Colts · SMU",
+      note: "Reached the NFL undrafted.",
+      contain: false,
     },
   ];
 
@@ -197,31 +233,94 @@ export default function SuccessStoriesPage() {
                       backgroundColor: player.contain ? 'var(--color-charcoal)' : undefined,
                     }}
                   >
-                    <div
-                      className="transition-transform duration-[600ms]"
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
-                      }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.transform = 'scale(1.04)';
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.transform = 'scale(1.0)';
-                      }}
-                    >
-                      <Image
-                        src={player.image}
-                        alt={player.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
+                    {player.image ? (
+                      player.blurFill ? (
+                        <>
+                          {/* Blurred fill behind a contained landscape photo so nothing crops */}
+                          <div
+                            style={{
+                              position: 'absolute',
+                              inset: 0,
+                              backgroundImage: `url(${player.image})`,
+                              backgroundSize: 'cover',
+                              backgroundPosition: 'center',
+                              filter: 'blur(22px)',
+                              transform: 'scale(1.25)',
+                            }}
+                          />
+                          <div style={{ position: 'absolute', inset: 0, background: 'rgba(0,0,0,0.22)' }} />
+                          <Image
+                            src={player.image}
+                            alt={player.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            style={{ objectFit: 'contain' }}
+                          />
+                        </>
+                      ) : (
+                        <div
+                          className="transition-transform duration-[600ms]"
+                          style={{
+                            width: '100%',
+                            height: '100%',
+                            transitionTimingFunction: 'cubic-bezier(0.16, 1, 0.3, 1)',
+                          }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.transform = 'scale(1.04)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.transform = 'scale(1.0)';
+                          }}
+                        >
+                          <Image
+                            src={player.image}
+                            alt={player.name}
+                            fill
+                            sizes="(max-width: 768px) 100vw, 33vw"
+                            style={{
+                              objectFit: player.contain ? 'contain' : 'cover',
+                              objectPosition: player.name === 'Charles Bassey' ? 'center top' : 'center'
+                            }}
+                          />
+                        </div>
+                      )
+                    ) : (
+                      <div
                         style={{
-                          objectFit: player.contain ? 'contain' : 'cover',
-                          objectPosition: player.name === 'Charles Bassey' ? 'center top' : 'center'
+                          width: '100%',
+                          height: '100%',
+                          display: 'flex',
+                          flexDirection: 'column',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          background: 'var(--color-charcoal)',
                         }}
-                      />
-                    </div>
+                      >
+                        <span
+                          style={{
+                            fontFamily: 'var(--font-editorial)',
+                            fontStyle: 'italic',
+                            fontSize: '3.25rem',
+                            lineHeight: 1,
+                            color: 'var(--color-accent-gold)',
+                          }}
+                        >
+                          {player.name.split(' ').slice(0, 2).map((w) => w.charAt(0)).join('')}
+                        </span>
+                        <span
+                          style={{
+                            fontFamily: 'var(--font-body)',
+                            fontSize: '0.75rem',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.18em',
+                            color: 'var(--color-gray-300)',
+                            marginTop: '0.85rem',
+                          }}
+                        >
+                          SMU
+                        </span>
+                      </div>
+                    )}
                   </div>
 
                   {/* Player Info */}

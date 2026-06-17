@@ -110,7 +110,7 @@ function Heading({ pre, children }: { pre?: string; children: React.ReactNode })
 }
 
 /* Click-to-play video: poster image until tapped, then loads/plays. preload="none" keeps the page light. */
-function SpeakerVideo({ src, poster, name }: { src: string; poster: string; name: string }) {
+function SpeakerVideo({ src, poster, name }: { src?: string; poster: string; name: string }) {
   const [playing, setPlaying] = useState(false);
   return (
     <div
@@ -124,7 +124,9 @@ function SpeakerVideo({ src, poster, name }: { src: string; poster: string; name
         border: '2px solid var(--color-charcoal)',
       }}
     >
-      {playing ? (
+      {!src ? (
+        <img src={poster} alt={name} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+      ) : playing ? (
         <video
           src={src}
           poster={poster}
@@ -198,6 +200,32 @@ const speakers = [
     bio: [
       'Kenneth Scott helps students and student-athletes understand who they are, communicate their value, build meaningful relationships, and create opportunities with intention. Through workshops, programs, and the REACH platform, he equips athletes and families with practical strategies to navigate recruiting, evaluate opportunities, and prepare for success beyond the game.',
       'In this session, Kenneth shares lessons from his own journey as an O-D All-American, Division I athlete, and professional football player, helping athletes and parents understand the recruiting process, what coaches are evaluating, how relationships influence opportunities, and how to make informed decisions throughout their journey.',
+    ],
+  },
+  {
+    name: 'Coach Wade Mouton',
+    titles: [
+      'Founder, Student Athlete Grind Therapy (SAGT)',
+      'Athlete Mentorship & Development',
+    ],
+    video: '/videos/wade-mouton.mp4',
+    poster: '/images/speaker-wade-mouton.jpg',
+    bio: [
+      'Coach Wade Mouton founded Student Athlete Grind Therapy (SAGT) to bridge the gap between talent and character. Built on the GRIND principles of Grit, Resilience, Integrity, Navigation, and Determination, SAGT develops the whole athlete through leadership, academic accountability, character, and recruiting and NIL education.',
+      'His message to families is direct. Athletic ability creates opportunities, but discipline, leadership, and work ethic are what turn them into lasting success on the field, in the classroom, and beyond the game.',
+    ],
+  },
+  {
+    name: 'Desmond Johnson',
+    titles: [
+      'Founder, Team 28',
+      'Mentor & Motivational Speaker',
+    ],
+    video: '',
+    poster: '/images/speaker-desmond-johnson.webp',
+    bio: [
+      'Desmond Johnson is a mentor, motivational speaker, and the founder of Team 28, where he equips student-athletes and young leaders to grow through discipline, accountability, and personal growth.',
+      'He speaks on leadership, resilience, character, and overcoming adversity: the life skills that matter beyond sports. His goal is to challenge the next generation to lead with purpose and integrity.',
     ],
   },
 ];

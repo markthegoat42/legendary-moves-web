@@ -14,7 +14,7 @@ export default function Navigation() {
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
     { href: '/nil', label: 'NIL' },
-    { href: '/camps', label: 'Camps' },
+    { href: '/camps', label: 'Seminar' },
     { href: '/success-stories', label: 'Success Stories' },
     { href: '/book-a-call', label: 'Book a Call' },
     { href: '/contact', label: 'Contact' },

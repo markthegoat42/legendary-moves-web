@@ -211,8 +211,9 @@ const speakers = [
     video: '/videos/wade-mouton.mp4',
     poster: '/images/speaker-wade-mouton.jpg',
     bio: [
-      'Coach Wade Mouton founded Student Athlete Grind Therapy (SAGT) to bridge the gap between talent and character. Built on the GRIND principles of Grit, Resilience, Integrity, Navigation, and Determination, SAGT develops the whole athlete through leadership, academic accountability, character, and recruiting and NIL education.',
-      'His message to families is direct. Athletic ability creates opportunities, but discipline, leadership, and work ethic are what turn them into lasting success on the field, in the classroom, and beyond the game.',
+      'Coach Wade Mouton founded Student Athlete Grind Therapy (SAGT) to bridge the gap between talent and character. Built on the GRIND principles of Grit, Resilience, Integrity, Navigation, and Determination, SAGT develops the whole athlete through leadership training, academic accountability, character development, athletic mentorship, and life-skills education.',
+      'His work meets families where they are. Through online mentorship, exposure opportunities, recruiting and NIL education, and personal development programs, SAGT prepares athletes ages 7 to 18 to compete at a high level while becoming confident leaders and responsible young adults.',
+      'His message is direct. Athletic ability creates opportunities, but discipline, leadership, and work ethic are what turn them into lasting success on the field, in the classroom, and beyond the game.',
     ],
   },
   {
@@ -224,8 +225,9 @@ const speakers = [
     video: '',
     poster: '/images/speaker-desmond-johnson.webp',
     bio: [
-      'Desmond Johnson is a mentor, motivational speaker, and the founder of Team 28, where he equips student-athletes and young leaders to grow through discipline, accountability, and personal growth.',
-      'He speaks on leadership, resilience, character, and overcoming adversity: the life skills that matter beyond sports. His goal is to challenge the next generation to lead with purpose and integrity.',
+      'Desmond Johnson is a mentor, motivational speaker, and youth development advocate, and the founder of Team 28. He has committed himself to equipping student-athletes and young leaders with the tools to succeed on and off the field through discipline, accountability, and personal growth.',
+      'Drawing on real-life experience and a passion for serving others, he speaks on leadership, resilience, character development, overcoming adversity, building a winning mindset, and the life skills that matter beyond sports. His ability to connect with athletes, parents, coaches, and community leaders has made him a respected voice in athlete development.',
+      'Through Team 28, he creates opportunities and life-changing experiences that challenge the next generation to lead with purpose, integrity, and excellence.',
     ],
   },
 ];
@@ -446,9 +448,16 @@ export default function CampsPage() {
             <Heading pre="GUEST SPEAKERS">
               Taught by people who have <em style={{ fontStyle: 'italic', color: MAROON }}>lived it</em>.
             </Heading>
-            <div className="space-y-16">
-              {speakers.map((s) => (
-                <div key={s.name} className="grid grid-cols-12 gap-8 items-start">
+            <div className="space-y-24">
+              {speakers.map((s, i) => (
+                <div
+                  key={s.name}
+                  className="grid grid-cols-12 gap-8 items-start"
+                  style={{
+                    borderTop: i === 0 ? 'none' : '1px solid oklch(from var(--color-accent-gold) l c h / 0.25)',
+                    paddingTop: i === 0 ? 0 : 'var(--space-xl)',
+                  }}
+                >
                   <div className="col-span-12 md:col-span-5 lg:col-span-4 flex justify-center md:justify-start">
                     <SpeakerVideo src={s.video} poster={s.poster} name={s.name} />
                   </div>

@@ -230,6 +230,21 @@ const speakers = [
       'Through Team 28, he creates opportunities and life-changing experiences that challenge the next generation to lead with purpose, integrity, and excellence.',
     ],
   },
+  {
+    name: 'Will Baggett',
+    titles: [
+      'Top 25 National Speaker',
+      'Former Chief of Staff, College Football Playoff',
+      'Personal Branding & Leadership',
+    ],
+    video: '',
+    poster: '/images/speaker-william-baggett.webp',
+    bio: [
+      'Nationally recognized as a Top 25 Speaker, Will Baggett brings an unmatched level of energy and engagement to every audience he addresses. From 2017 to 2020, he served as Operations Coordinator and Chief of Staff for the College Football Playoff, where the White House Department of Communications recognized him for his operational excellence and communication skills.',
+      'Over a decade of service to the sports industry, Will helped produce events including the Super Bowl, the Peach Bowl, the Final Four, and a host of college football bowl games.',
+      'Widely considered a leading authority on personal branding, body language, and soft-skills leadership, he uses his personality and quick wit to leave teams more inspired and connected than ever before.',
+    ],
+  },
 ];
 
 const roadmap = [

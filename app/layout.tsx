@@ -6,6 +6,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import ScrollProgress from "@/components/ScrollProgress";
 import StickyCallCTA from "@/components/StickyCallCTA";
+import { Analytics } from "@vercel/analytics/next";
 
 const bebasNeue = Bebas_Neue({
   variable: "--font-bebas-neue",
@@ -51,6 +52,7 @@ export default function RootLayout({
         {children}
         <StickyCallCTA />
         <Footer />
+        <Analytics />
       </body>
     </html>
   );

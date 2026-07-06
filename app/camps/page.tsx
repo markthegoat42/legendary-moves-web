@@ -6,10 +6,15 @@ import Link from 'next/link';
 
 const MAROON = 'oklch(35% 0.14 22)';
 
-// Registration — live Ticket Tailor event pages for the $50 symposium (one per city).
+// Registration — live Ticket Tailor event page for the $50 symposium.
 // Payments run through the connected Stripe account.
 const REGISTER_HOUSTON = 'https://buytickets.at/legendarymoves/2266774';
-const REGISTER_DFW = 'https://buytickets.at/legendarymoves/2266814';
+
+// Event details — edit in one place.
+// TODO: confirm the exact seminar START TIME with O-D and update SEMINAR_TIME below.
+const SEMINAR_DATE = 'Saturday, July 18, 2026';
+const SEMINAR_TIME = 'Start time TBD — confirm with O-D';
+const VENUE = 'Houston Christian University';
 
 // Renders a register button. If the href is an external Stripe link it opens in a
 // new tab; the internal placeholder navigates normally.
@@ -186,6 +191,19 @@ function SpeakerVideo({ src, poster, name }: { src?: string; poster: string; nam
 
 const speakers = [
   {
+    name: 'Coach Chris Scott Jr.',
+    titles: [
+      'Host · Founder, Legendary Moves',
+      '14 Years Inside College Football Recruiting',
+    ],
+    video: '',
+    poster: '/images/chris-scott-commanders.jpg',
+    bio: [
+      'Coach Chris Scott Jr. spent 14 years in the rooms where scholarships actually get decided — evaluating film, advising families, and watching talented players get passed over for one reason: no one taught them how recruiting really works.',
+      'He built Legendary Moves to put that knowledge in one room. In this symposium he breaks down exactly what college coaches look for, how film and social media make or break offers, how NIL really works, and the paths beyond Division I that most families never hear about.',
+    ],
+  },
+  {
     name: 'Kenneth Scott',
     titles: [
       'Former O-D All-American',
@@ -287,7 +305,7 @@ const sampleBio = [
 
 export default function CampsPage() {
   return (
-    <div style={{ background: 'var(--bg-primary)' }}>
+    <div style={{ background: 'var(--bg-primary)', paddingBottom: '4.5rem' }}>
       {/* HERO */}
       <section
         className="relative flex items-end"
@@ -350,25 +368,59 @@ export default function CampsPage() {
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
                 color: 'var(--accent-gold)',
-                marginBottom: 'clamp(2rem, 4vh, 3rem)',
+                marginBottom: '1rem',
               }}
             >
-              O-D RECRUITING &amp; PLAYER DEVELOPMENT SYMPOSIUM — HOUSTON &amp; DFW — JULY 2026
+              RECRUITING &amp; NIL SYMPOSIUM · HOSTED BY COACH CHRIS SCOTT JR.
+            </p>
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
+                fontWeight: 500,
+                color: 'var(--text-on-dark)',
+                marginBottom: '0.75rem',
+              }}
+            >
+              <strong>$50 per athlete</strong>&nbsp; · &nbsp;Saturday, July 18, 2026&nbsp; · &nbsp;Houston Christian University
+            </p>
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.95rem',
+                lineHeight: 1.5,
+                color: 'rgba(255,255,255,0.82)',
+                marginBottom: 'clamp(1.75rem, 3.5vh, 2.5rem)',
+                maxWidth: '34rem',
+              }}
+            >
+              From the team behind <strong>Tank Dell, Rashee Rice &amp; Courtland Sutton</strong> — in one room with
+              your family for one day.
             </p>
             <a
               href="#register"
               className="btn-primary inline-block"
               style={{
-                padding: '1rem 2rem',
-                fontSize: '0.875rem',
+                padding: '1rem 2.25rem',
+                fontSize: '0.9rem',
                 fontWeight: 700,
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
                 textDecoration: 'none',
               }}
             >
-              RESERVE YOUR SEAT ›
+              Reserve Your Seat · $50 ›
             </a>
+            <p
+              style={{
+                fontFamily: 'var(--font-body)',
+                fontSize: '0.8rem',
+                color: 'rgba(255,255,255,0.7)',
+                marginTop: '0.9rem',
+              }}
+            >
+              Seats are limited · Full refund if it&apos;s not worth your time.
+            </p>
           </motion.div>
         </div>
         <motion.div
@@ -390,52 +442,30 @@ export default function CampsPage() {
         <div className="container-lg">
           <motion.div {...fadeUp}>
             <Heading>
-              Two dates. <em style={{ fontStyle: 'italic', color: MAROON }}>Two cities.</em>
+              One city. <em style={{ fontStyle: 'italic', color: MAROON }}>One Saturday.</em>
             </Heading>
             <div className="grid grid-cols-12 gap-8">
-              <div className="col-span-12 md:col-span-6 border-t-2 pt-6" style={{ borderColor: 'var(--color-charcoal)' }}>
+              <div className="col-span-12 md:col-span-8 border-t-2 pt-6" style={{ borderColor: 'var(--color-charcoal)' }}>
                 <p className="text-xs uppercase tracking-wider font-mono mb-2" style={{ color: 'var(--color-accent-gold)' }}>
-                  STOP 01
+                  HOUSTON · ONE DAY ONLY
                 </p>
                 <h3 className="heading-sm uppercase mb-2" style={{ color: 'var(--color-charcoal)' }}>
-                  Houston, TX
+                  {SEMINAR_DATE}
                 </h3>
                 <p className="text-sm uppercase tracking-wide font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
-                  HOUSTON CHRISTIAN UNIVERSITY
+                  {VENUE} · {SEMINAR_TIME}
                 </p>
-                <p className="body-base" style={{ marginBottom: 0 }}>
-                  <span className="text-xs uppercase tracking-wider font-mono" style={{ color: 'var(--color-charcoal)' }}>
-                    Camp
-                  </span>
-                  <br />
-                  July 17–19, 2026
+                <p className="body-base" style={{ marginBottom: 0, maxWidth: '38rem' }}>
+                  The Recruiting &amp; NIL Symposium is a live, in-person session hosted by Coach Chris Scott Jr., held
+                  during the Offense-Defense Camp. Open to camp athletes and to families who register online.
                 </p>
                 <p className="text-xs uppercase tracking-wider font-mono mb-4 mt-6" style={{ color: MAROON }}>
                   Symposium · $50 per athlete
                 </p>
-                <RegisterButton href={REGISTER_HOUSTON} label="Register — Houston · $50" />
-              </div>
-              <div className="col-span-12 md:col-span-6 border-t-2 pt-6" style={{ borderColor: 'var(--color-charcoal)' }}>
-                <p className="text-xs uppercase tracking-wider font-mono mb-2" style={{ color: 'var(--color-accent-gold)' }}>
-                  STOP 02
+                <RegisterButton href={REGISTER_HOUSTON} label="Reserve Your Seat · $50" />
+                <p className="text-xs mt-4" style={{ color: 'var(--color-gray-600)' }}>
+                  Seats are limited · Full refund if it&apos;s not worth your time.
                 </p>
-                <h3 className="heading-sm uppercase mb-2" style={{ color: 'var(--color-charcoal)' }}>
-                  Dallas–Fort Worth, TX
-                </h3>
-                <p className="text-sm uppercase tracking-wide font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
-                  UNIVERSITY OF TEXAS AT ARLINGTON
-                </p>
-                <p className="body-base" style={{ marginBottom: 0 }}>
-                  <span className="text-xs uppercase tracking-wider font-mono" style={{ color: 'var(--color-charcoal)' }}>
-                    Camp
-                  </span>
-                  <br />
-                  July 24–26, 2026
-                </p>
-                <p className="text-xs uppercase tracking-wider font-mono mb-4 mt-6" style={{ color: MAROON }}>
-                  Symposium · $50 per athlete
-                </p>
-                <RegisterButton href={REGISTER_DFW} label="Register — DFW · $50" />
               </div>
             </div>
 
@@ -444,9 +474,53 @@ export default function CampsPage() {
                 Have Questions? Book a Call
               </Link>
               <span className="text-sm" style={{ color: 'var(--color-gray-600)' }}>
-                Seats at each city are limited.
+                Seats are limited.
               </span>
             </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <GoldDivider />
+
+      {/* PROOF / TRACK RECORD */}
+      <section
+        className="border-b-2"
+        style={{ borderColor: 'var(--color-charcoal)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
+      >
+        <div className="container-lg">
+          <motion.div {...fadeUp}>
+            <Heading pre="THE TRACK RECORD">
+              Coaching that puts athletes <em style={{ fontStyle: 'italic', color: MAROON }}>on the map</em>.
+            </Heading>
+            <div className="max-w-4xl space-y-6 mb-10">
+              <p className="body-base">
+                The people behind this symposium have helped develop and place athletes at every level — from Power Five
+                signings to the NFL. This is the same knowledge, in one room, for your family.
+              </p>
+            </div>
+            <div className="flex flex-wrap gap-3 max-w-4xl mb-10">
+              {[
+                'Tank Dell · Houston Texans',
+                'Courtland Sutton · Denver Broncos',
+                'Rashee Rice · Kansas City Chiefs',
+                'Marcus Jones · New England Patriots',
+                'Patrick Paul · Miami Dolphins',
+                'Jakolby Jones · LSU',
+                'Charles Bassey · San Antonio Spurs',
+              ].map((n) => (
+                <span
+                  key={n}
+                  className="text-xs uppercase tracking-wider font-mono"
+                  style={{ border: '1px solid var(--color-charcoal)', padding: '0.5rem 1rem', color: 'var(--color-charcoal)' }}
+                >
+                  {n}
+                </span>
+              ))}
+            </div>
+            <Link href="/success-stories" className="btn btn-outline uppercase text-xs tracking-wider">
+              See the Success Stories
+            </Link>
           </motion.div>
         </div>
       </section>
@@ -962,8 +1036,8 @@ export default function CampsPage() {
               </div>
               <div className="col-span-12 md:col-span-6 md:pl-8">
                 <p className="body-base mb-8 text-sm" style={{ color: 'var(--color-gray-300)' }}>
-                  The symposium is $50 per athlete and seats at each city are limited. Pick your city and reserve your
-                  seat.
+                  The symposium is $50 per athlete, Saturday, July 18 in Houston, and seats are limited. Full refund if
+                  it&apos;s not worth your time — reserve your seat.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a href="#register" className="btn btn-primary uppercase text-xs tracking-wider">
@@ -982,6 +1056,41 @@ export default function CampsPage() {
           </motion.div>
         </div>
       </section>
+
+      {/* STICKY CONVERSION BAR — always-visible register CTA (goes straight to checkout) */}
+      <div
+        style={{
+          position: 'fixed',
+          left: 0,
+          right: 0,
+          bottom: 0,
+          zIndex: 50,
+          background: 'var(--color-navy, #1A1D24)',
+          borderTop: '2px solid var(--accent-gold)',
+          padding: '0.7rem 1rem',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '1rem',
+          boxShadow: '0 -4px 20px rgba(0,0,0,0.25)',
+        }}
+      >
+        <span
+          className="hidden sm:inline"
+          style={{ color: 'var(--color-white)', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.02em' }}
+        >
+          Recruiting &amp; NIL Symposium · Sat July 18 · Houston · $50
+        </span>
+        <a
+          href={REGISTER_HOUSTON}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn btn-primary uppercase text-xs tracking-wider"
+          style={{ whiteSpace: 'nowrap' }}
+        >
+          Reserve Your Seat · $50
+        </a>
+      </div>
     </div>
   );
 }

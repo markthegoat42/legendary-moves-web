@@ -13,8 +13,17 @@ const REGISTER_HOUSTON = 'https://buytickets.at/legendarymoves/2266774';
 // Event details — edit in one place.
 // TODO: confirm the exact seminar START TIME with O-D and update SEMINAR_TIME below.
 const SEMINAR_DATE = 'Saturday, July 18, 2026';
-const SEMINAR_TIME = 'Start time TBD — confirm with O-D';
+const SEMINAR_TIME = '6:00–8:00 PM';
 const VENUE = 'Houston Christian University';
+
+// Fire the Meta Pixel "InitiateCheckout" event when someone heads to the ticket page.
+// (Purchase itself happens on buytickets.at — track that with the pixel in Ticket Tailor.)
+function trackCheckout() {
+  const w = window as unknown as { fbq?: (...args: unknown[]) => void };
+  if (typeof window !== 'undefined' && typeof w.fbq === 'function') {
+    w.fbq('track', 'InitiateCheckout');
+  }
+}
 
 // Renders a register button. If the href is an external Stripe link it opens in a
 // new tab; the internal placeholder navigates normally.
@@ -23,6 +32,7 @@ function RegisterButton({ href, label }: { href: string; label: string }) {
   return (
     <a
       href={href}
+      onClick={trackCheckout}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
       className="btn btn-primary uppercase text-xs tracking-wider inline-block"
     >
@@ -301,6 +311,35 @@ const sampleBio = [
   'Email address',
 ];
 
+/* ---------- testimonials (fill with real quotes; empty = section stays hidden) ---------- */
+// TODO: paste REAL testimonials here — from Will Baggett's footage (with his permission),
+// and after July 18 from actual attendees. While this array is empty, the "What people say"
+// section does not render, so nothing fake ever ships.
+const testimonials: { quote: string; name: string; role: string }[] = [
+  {
+    quote:
+      "In my eight years here, we've brought Will in multiple times to work with our guys. You need somebody who can connect and keep the guys active and engaged.",
+    name: 'Kevin Washington',
+    role: 'Director of Player Development · University of Texas Football',
+  },
+  {
+    quote: "He's elite. This guy is a rock star. If you're considering using him — lock in, go use him.",
+    name: 'Justice Jones',
+    role: 'Director of Student-Athlete Development · Iowa State Football',
+  },
+  {
+    quote:
+      'I highly recommend Will. His message resonates deeply — helping our guys excel on the field and grow as individuals off it.',
+    name: 'Bra Chungong',
+    role: 'Player Development & Community Engagement · Georgia State Football',
+  },
+  {
+    quote: "He didn't just teach us how to build our brand — he taught us how to be a man.",
+    name: 'Jake Remsberg',
+    role: 'Iowa State Football',
+  },
+];
+
 /* ---------- page ---------- */
 
 export default function CampsPage() {
@@ -524,6 +563,46 @@ export default function CampsPage() {
           </motion.div>
         </div>
       </section>
+
+      {testimonials.length > 0 && (
+        <>
+          <GoldDivider />
+
+          {/* TESTIMONIALS */}
+          <section
+            className="border-b-2"
+            style={{ borderColor: 'var(--color-charcoal)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
+          >
+            <div className="container-lg">
+              <motion.div {...fadeUp}>
+                <Heading pre="THE PROGRAMS ON OUR SPEAKERS">
+                  What college football programs <em style={{ fontStyle: 'italic', color: MAROON }}>say</em>.
+                </Heading>
+                <p className="body-base" style={{ maxWidth: '46rem', marginBottom: '2rem' }}>
+                  Endorsements for guest speaker <strong>Will Baggett</strong>, from the college football programs
+                  he&apos;s worked with.
+                </p>
+                <div className="grid grid-cols-12 gap-8">
+                  {testimonials.map((t) => (
+                    <div
+                      key={t.name + t.quote.slice(0, 12)}
+                      className="col-span-12 md:col-span-6 border-t-2 pt-6"
+                      style={{ borderColor: 'var(--color-charcoal)' }}
+                    >
+                      <p className="body-base" style={{ fontStyle: 'italic', marginBottom: '1rem', color: 'var(--color-charcoal)' }}>
+                        &ldquo;{t.quote}&rdquo;
+                      </p>
+                      <p className="text-xs uppercase tracking-wider font-mono" style={{ color: 'var(--color-accent-gold)' }}>
+                        {t.name} · {t.role}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            </div>
+          </section>
+        </>
+      )}
 
       <GoldDivider />
 
@@ -1083,6 +1162,7 @@ export default function CampsPage() {
         </span>
         <a
           href={REGISTER_HOUSTON}
+          onClick={trackCheckout}
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-primary uppercase text-xs tracking-wider"

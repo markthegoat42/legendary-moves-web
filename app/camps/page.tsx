@@ -6,18 +6,59 @@ import Link from 'next/link';
 
 const MAROON = 'oklch(35% 0.14 22)';
 
-// Registration — live Ticket Tailor event page for the $50 symposium.
-// Payments run through the connected Stripe account.
-const REGISTER_HOUSTON = 'https://buytickets.at/legendarymoves/2266774';
+// Registration — live Ticket Tailor event page (Baton Rouge). Payments run through Stripe.
+const REGISTER_URL = 'https://www.tickettailor.com/events/legendarymoves/2359583';
 
 // Event details — edit in one place.
-// TODO: confirm the exact seminar START TIME with O-D and update SEMINAR_TIME below.
-const SEMINAR_DATE = 'Saturday, July 18, 2026';
-const SEMINAR_TIME = '6:00–8:00 PM';
-const VENUE = 'Houston Christian University';
+const SEMINAR_DATE = 'Saturday, November 8, 2026';
+const LOCATION = 'Baton Rouge, LA';
+
+const schedule = [
+  { label: 'Registration', time: '9:00 AM' },
+  { label: 'Seminar', time: '10:00 AM – 1:00 PM' },
+  { label: 'VIP Q&A', time: '1:00 – 2:00 PM' },
+];
+
+const pricing = [
+  { tier: 'Early Bird', price: '$40' },
+  { tier: 'General Admission', price: '$60' },
+  { tier: 'Family Pass', price: '$90' },
+  { tier: 'Coach Pass', price: '$50' },
+  { tier: 'VIP Recruiting Review', price: '$150' },
+];
+
+const agenda = [
+  'The New Era of College Recruiting',
+  'What Coaches Really Look For',
+  'The Recruiting Timeline: 8th Grade to the Transfer Portal',
+  'Common Recruiting Mistakes',
+  'Building an Effective Recruiting Profile',
+  'Understanding NCAA, NAIA & JUCO Opportunities',
+  'Scholarships, NIL & Revenue Sharing',
+  'Signing Day Preparation',
+  'Bonus: Saving Families Money During Recruiting',
+];
+
+const vipBenefits = [
+  'A 20-minute one-on-one recruiting consultation',
+  'Highlight film review',
+  'Social media audit',
+  'A full recruiting evaluation',
+  'A personalized recruiting roadmap',
+];
+
+const includedResources = [
+  'Recruiting Workbook',
+  'Recruiting Calendar',
+  'Coach Email Templates',
+  'Contact Tracker',
+  'Official Visit Checklist',
+  'Scholarship Guide',
+  'Transfer Portal Guide',
+  'Recruiting Timeline',
+];
 
 // Fire the Meta Pixel "InitiateCheckout" event when someone heads to the ticket page.
-// (Purchase itself happens on buytickets.at — track that with the pixel in Ticket Tailor.)
 function trackCheckout() {
   const w = window as unknown as { fbq?: (...args: unknown[]) => void };
   if (typeof window !== 'undefined' && typeof w.fbq === 'function') {
@@ -25,8 +66,7 @@ function trackCheckout() {
   }
 }
 
-// Renders a register button. If the href is an external Stripe link it opens in a
-// new tab; the internal placeholder navigates normally.
+// Register button. External Ticket Tailor links open in a new tab.
 function RegisterButton({ href, label }: { href: string; label: string }) {
   const external = href.startsWith('http');
   return (
@@ -124,8 +164,19 @@ function Heading({ pre, children }: { pre?: string; children: React.ReactNode })
   );
 }
 
-/* Click-to-play video: poster image until tapped, then loads/plays. preload="none" keeps the page light. */
-function SpeakerVideo({ src, poster, name }: { src?: string; poster: string; name: string }) {
+/* Speaker media. Video = click-to-play; empty video = static photo. aspect defaults to a
+   tall portrait but can be overridden per speaker (e.g. a 4:5 credential graphic). */
+function SpeakerVideo({
+  src,
+  poster,
+  name,
+  aspect = '9 / 16',
+}: {
+  src?: string;
+  poster: string;
+  name: string;
+  aspect?: string;
+}) {
   const [playing, setPlaying] = useState(false);
   return (
     <div
@@ -133,7 +184,7 @@ function SpeakerVideo({ src, poster, name }: { src?: string; poster: string; nam
         position: 'relative',
         width: '100%',
         maxWidth: '340px',
-        aspectRatio: '9 / 16',
+        aspectRatio: aspect,
         background: 'var(--color-charcoal)',
         overflow: 'hidden',
         border: '2px solid var(--color-charcoal)',
@@ -204,80 +255,23 @@ const speakers = [
     name: 'Coach Chris Scott Jr.',
     titles: [
       'Host · Founder, Legendary Moves',
-      '14 Years Inside College Football Recruiting',
+      '14 Years Inside College & Pro Football Recruiting',
+      'Bill Walsh Diversity Coaching Fellow · Washington Commanders',
     ],
     video: '',
     poster: '/images/chris-scott-commanders.jpg',
+    aspect: '4 / 5',
     bio: [
-      'Coach Chris Scott Jr. spent 14 years in the rooms where scholarships actually get decided — evaluating film, advising families, and watching talented players get passed over for one reason: no one taught them how recruiting really works.',
-      'He built Legendary Moves to put that knowledge in one room. In this symposium he breaks down exactly what college coaches look for, how film and social media make or break offers, how NIL really works, and the paths beyond Division I that most families never hear about.',
-    ],
-  },
-  {
-    name: 'Kenneth Scott',
-    titles: [
-      'Former O-D All-American',
-      'Adjunct Professor, Rice University',
-      'Former Professional Athlete',
-      'Author',
-      'Creator, Social Health Brand',
-      'Founder of REACH',
-    ],
-    video: '/videos/kenneth-scott.mp4',
-    poster: '/images/speaker-kenneth-scott.jpg',
-    bio: [
-      'Kenneth Scott helps students and student-athletes understand who they are, communicate their value, build meaningful relationships, and create opportunities with intention. Through workshops, programs, and the REACH platform, he equips athletes and families with practical strategies to navigate recruiting, evaluate opportunities, and prepare for success beyond the game.',
-      'In this session, Kenneth shares lessons from his own journey as an O-D All-American, Division I athlete, and professional football player, helping athletes and parents understand the recruiting process, what coaches are evaluating, how relationships influence opportunities, and how to make informed decisions throughout their journey.',
-    ],
-  },
-  {
-    name: 'Coach Wade Mouton',
-    titles: [
-      'Founder, Student Athlete Grind Therapy (SAGT)',
-      'Athlete Mentorship & Development',
-    ],
-    video: '/videos/wade-mouton.mp4',
-    poster: '/images/speaker-wade-mouton.jpg',
-    bio: [
-      'Coach Wade Mouton founded Student Athlete Grind Therapy (SAGT) to bridge the gap between talent and character. Built on the GRIND principles of Grit, Resilience, Integrity, Navigation, and Determination, SAGT develops the whole athlete through leadership training, academic accountability, character development, athletic mentorship, and life-skills education.',
-      'His work meets families where they are. Through online mentorship, exposure opportunities, recruiting and NIL education, and personal development programs, SAGT prepares athletes ages 7 to 18 to compete at a high level while becoming confident leaders and responsible young adults.',
-      'His message is direct. Athletic ability creates opportunities, but discipline, leadership, and work ethic are what turn them into lasting success on the field, in the classroom, and beyond the game.',
-    ],
-  },
-  {
-    name: 'Desmond Johnson',
-    titles: [
-      'Founder, Team 28',
-      'Mentor & Motivational Speaker',
-    ],
-    video: '',
-    poster: '/images/speaker-desmond-johnson.webp',
-    bio: [
-      'Desmond Johnson is a mentor, motivational speaker, and youth development advocate, and the founder of Team 28. He has committed himself to equipping student-athletes and young leaders with the tools to succeed on and off the field through discipline, accountability, and personal growth.',
-      'Drawing on real-life experience and a passion for serving others, he speaks on leadership, resilience, character development, overcoming adversity, building a winning mindset, and the life skills that matter beyond sports. His ability to connect with athletes, parents, coaches, and community leaders has made him a respected voice in athlete development.',
-      'Through Team 28, he creates opportunities and life-changing experiences that challenge the next generation to lead with purpose, integrity, and excellence.',
-    ],
-  },
-  {
-    name: 'Will Baggett',
-    titles: [
-      'Top 25 National Speaker',
-      'Former Chief of Staff, College Football Playoff',
-      'Personal Branding & Leadership',
-    ],
-    video: '',
-    poster: '/images/speaker-william-baggett.webp',
-    bio: [
-      'Nationally recognized as a Top 25 Speaker, Will Baggett brings an unmatched level of energy and engagement to every audience he addresses. From 2017 to 2020, he served as Operations Coordinator and Chief of Staff for the College Football Playoff, where the White House Department of Communications recognized him for his operational excellence and communication skills.',
-      'Over a decade of service to the sports industry, Will helped produce events including the Super Bowl, the Peach Bowl, the Final Four, and a host of college football bowl games.',
-      'Widely considered a leading authority on personal branding, body language, and soft-skills leadership, he uses his personality and quick wit to leave teams more inspired and connected than ever before.',
+      'Coach Chris Scott Jr. spent 14 years in the rooms where scholarships actually get decided, evaluating film, advising families, and watching talented players get passed over for one reason: no one taught them how recruiting really works.',
+      'He built his career inside programs at TCU, SMU, the University of Houston, Temple, Grambling State, and the Washington Commanders, and in 2023 was selected for the Bill Walsh Diversity Coaching Fellowship with the Commanders.',
+      'He founded Legendary Moves to put that knowledge in one room. In this seminar he breaks down exactly what college coaches look for, how film and social media make or break offers, how NIL and revenue sharing really work, and how families prepare for signing day.',
     ],
   },
 ];
 
 const roadmap = [
   { grade: '7th – 8th Grade', items: ['Fundamentals first', 'Academics on track', 'Skill development', 'Building good habits'] },
-  { grade: '9th – 10th Grade', items: ['Exposure begins', 'First highlight film', 'Camp participation', 'A clean social presence'] },
+  { grade: '9th – 10th Grade', items: ['Exposure begins', 'First highlight film', 'Showcase participation', 'A clean social presence'] },
   { grade: '11th Grade', items: ['The major recruiting year', 'Coach communication', 'Campus visits', 'Scholarship conversations'] },
   { grade: '12th Grade', items: ['Signing day preparation', 'Roster and walk-on paths', 'Transfer portal education', 'Finding the right fit'] },
 ];
@@ -290,55 +284,18 @@ const divisions = [
   { name: 'Junior College (JUCO)', lines: ['A development opportunity', 'An academic recovery path', 'A route to NCAA programs'] },
 ];
 
-const whyAttend = [
-  'Elite coaching',
-  'Position development',
-  'Live competition',
-  'Recruiting education',
-  'NIL education',
-  'Parent symposium',
-  'Exposure opportunities',
-  'O-D All-American Bowl selection',
-];
-
 const sampleBio = [
   'Player Name | QB',
   'Class of 2028',
   '6’2″ · 190 lbs',
-  'Houston, TX',
+  'Baton Rouge, LA',
   'GPA: 3.8',
   'Hudl link',
   'Email address',
 ];
 
 /* ---------- testimonials (fill with real quotes; empty = section stays hidden) ---------- */
-// TODO: paste REAL testimonials here — from Will Baggett's footage (with his permission),
-// and after July 18 from actual attendees. While this array is empty, the "What people say"
-// section does not render, so nothing fake ever ships.
-const testimonials: { quote: string; name: string; role: string }[] = [
-  {
-    quote:
-      "In my eight years here, we've brought Will in multiple times to work with our guys. You need somebody who can connect and keep the guys active and engaged.",
-    name: 'Kevin Washington',
-    role: 'Director of Player Development · University of Texas Football',
-  },
-  {
-    quote: "He's elite. This guy is a rock star. If you're considering using him — lock in, go use him.",
-    name: 'Justice Jones',
-    role: 'Director of Student-Athlete Development · Iowa State Football',
-  },
-  {
-    quote:
-      'I highly recommend Will. His message resonates deeply — helping our guys excel on the field and grow as individuals off it.',
-    name: 'Bra Chungong',
-    role: 'Player Development & Community Engagement · Georgia State Football',
-  },
-  {
-    quote: "He didn't just teach us how to build our brand — he taught us how to be a man.",
-    name: 'Jake Remsberg',
-    role: 'Iowa State Football',
-  },
-];
+const testimonials: { quote: string; name: string; role: string }[] = [];
 
 /* ---------- page ---------- */
 
@@ -397,7 +354,7 @@ export default function CampsPage() {
                 marginBottom: 'clamp(1.5rem, 3vh, 2.5rem)',
               }}
             >
-              More than <em style={{ fontStyle: 'italic', color: 'var(--accent-gold)' }}>exposure</em>.
+              Before <em style={{ fontStyle: 'italic', color: 'var(--accent-gold)' }}>signing day</em>.
             </h1>
             <p
               style={{
@@ -410,7 +367,7 @@ export default function CampsPage() {
                 marginBottom: '1rem',
               }}
             >
-              RECRUITING &amp; NIL SYMPOSIUM · HOSTED BY COACH CHRIS SCOTT JR.
+              SIGNING DAY RECRUITING SEMINAR · HOSTED BY COACH CHRIS SCOTT JR.
             </p>
             <p
               style={{
@@ -421,7 +378,7 @@ export default function CampsPage() {
                 marginBottom: '0.75rem',
               }}
             >
-              <strong>$50 per athlete</strong>&nbsp; · &nbsp;Saturday, July 18, 2026&nbsp; · &nbsp;Houston Christian University
+              <strong>{LOCATION}</strong>&nbsp; · &nbsp;{SEMINAR_DATE}&nbsp; · &nbsp;Tickets from $40
             </p>
             <p
               style={{
@@ -433,8 +390,8 @@ export default function CampsPage() {
                 maxWidth: '34rem',
               }}
             >
-              From the team behind <strong>Tank Dell, Rashee Rice &amp; Courtland Sutton</strong> — in one room with
-              your family for one day.
+              Everything parents need to know before the December signing period — from the team behind{' '}
+              <strong>Tank Dell, Rashee Rice &amp; Courtland Sutton</strong>.
             </p>
             <a
               href="#register"
@@ -448,7 +405,7 @@ export default function CampsPage() {
                 textDecoration: 'none',
               }}
             >
-              Reserve Your Seat · $50 ›
+              Reserve Your Seat ›
             </a>
             <p
               style={{
@@ -458,7 +415,7 @@ export default function CampsPage() {
                 marginTop: '0.9rem',
               }}
             >
-              Seats are limited · Full refund if it&apos;s not worth your time.
+              Seats are limited · Early Bird pricing available now.
             </p>
           </motion.div>
         </div>
@@ -472,7 +429,7 @@ export default function CampsPage() {
         </motion.div>
       </section>
 
-      {/* DATES & LOCATIONS + per-city registration */}
+      {/* EVENT DETAILS + REGISTRATION */}
       <section
         id="register"
         className="border-b-2"
@@ -486,24 +443,44 @@ export default function CampsPage() {
             <div className="grid grid-cols-12 gap-8">
               <div className="col-span-12 md:col-span-8 border-t-2 pt-6" style={{ borderColor: 'var(--color-charcoal)' }}>
                 <p className="text-xs uppercase tracking-wider font-mono mb-2" style={{ color: 'var(--color-accent-gold)' }}>
-                  HOUSTON · ONE DAY ONLY
+                  {LOCATION} · ONE DAY ONLY
                 </p>
-                <h3 className="heading-sm uppercase mb-2" style={{ color: 'var(--color-charcoal)' }}>
+                <h3 className="heading-sm uppercase mb-4" style={{ color: 'var(--color-charcoal)' }}>
                   {SEMINAR_DATE}
                 </h3>
-                <p className="text-sm uppercase tracking-wide font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
-                  {VENUE} · {SEMINAR_TIME}
+                <div className="flex flex-wrap gap-x-8 gap-y-2 mb-6">
+                  {schedule.map((s) => (
+                    <span key={s.label} className="text-sm uppercase tracking-wide font-mono" style={{ color: 'var(--color-gray-600)' }}>
+                      {s.label}: {s.time}
+                    </span>
+                  ))}
+                </div>
+                <p className="body-base" style={{ marginBottom: 0, maxWidth: '40rem' }}>
+                  The Signing Day Recruiting Seminar is a live, in-person session hosted by Coach Chris Scott Jr. — the
+                  up-to-date recruiting education parents, athletes, and coaches need before the December signing period,
+                  covering NIL, roster limits, scholarships, recruiting strategy, and signing day preparation.
                 </p>
-                <p className="body-base" style={{ marginBottom: 0, maxWidth: '38rem' }}>
-                  The Recruiting &amp; NIL Symposium is a live, in-person session hosted by Coach Chris Scott Jr., held
-                  during the Offense-Defense Camp. Open to camp athletes and to families who register online.
+
+                {/* Pricing */}
+                <p className="text-xs uppercase tracking-wider font-mono mb-4 mt-8" style={{ color: MAROON }}>
+                  Tickets
                 </p>
-                <p className="text-xs uppercase tracking-wider font-mono mb-4 mt-6" style={{ color: MAROON }}>
-                  Symposium · $50 per athlete
-                </p>
-                <RegisterButton href={REGISTER_HOUSTON} label="Reserve Your Seat · $50" />
+                <div className="max-w-md mb-6">
+                  {pricing.map((p, i) => (
+                    <div
+                      key={p.tier}
+                      className={`flex items-center justify-between border-t-2 pt-3 pb-3 ${i === pricing.length - 1 ? 'border-b-2' : ''}`}
+                      style={{ borderColor: 'var(--color-charcoal)' }}
+                    >
+                      <span className="text-sm uppercase tracking-wide font-mono">{p.tier}</span>
+                      <span className="text-sm font-mono font-bold" style={{ color: MAROON }}>{p.price}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <RegisterButton href={REGISTER_URL} label="Reserve Your Seat" />
                 <p className="text-xs mt-4" style={{ color: 'var(--color-gray-600)' }}>
-                  Seats are limited · Full refund if it&apos;s not worth your time.
+                  Seats are limited · Venue announced soon.
                 </p>
               </div>
             </div>
@@ -513,7 +490,7 @@ export default function CampsPage() {
                 Have Questions? Book a Call
               </Link>
               <span className="text-sm" style={{ color: 'var(--color-gray-600)' }}>
-                Seats are limited.
+                Houston date coming soon.
               </span>
             </div>
           </motion.div>
@@ -530,11 +507,11 @@ export default function CampsPage() {
         <div className="container-lg">
           <motion.div {...fadeUp}>
             <Heading pre="THE TRACK RECORD">
-              Coaching that puts athletes <em style={{ fontStyle: 'italic', color: MAROON }}>on the map</em>.
+              Guidance that puts athletes <em style={{ fontStyle: 'italic', color: MAROON }}>on the map</em>.
             </Heading>
             <div className="max-w-4xl space-y-6 mb-10">
               <p className="body-base">
-                The people behind this symposium have helped develop and place athletes at every level — from Power Five
+                The people behind this seminar have helped develop and place athletes at every level, from Power Five
                 signings to the NFL. This is the same knowledge, in one room, for your family.
               </p>
             </div>
@@ -567,21 +544,15 @@ export default function CampsPage() {
       {testimonials.length > 0 && (
         <>
           <GoldDivider />
-
-          {/* TESTIMONIALS */}
           <section
             className="border-b-2"
             style={{ borderColor: 'var(--color-charcoal)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
           >
             <div className="container-lg">
               <motion.div {...fadeUp}>
-                <Heading pre="THE PROGRAMS ON OUR SPEAKERS">
-                  What college football programs <em style={{ fontStyle: 'italic', color: MAROON }}>say</em>.
+                <Heading pre="WHAT PEOPLE SAY">
+                  In their own <em style={{ fontStyle: 'italic', color: MAROON }}>words</em>.
                 </Heading>
-                <p className="body-base" style={{ maxWidth: '46rem', marginBottom: '2rem' }}>
-                  Endorsements for guest speaker <strong>Will Baggett</strong>, from the college football programs
-                  he&apos;s worked with.
-                </p>
                 <div className="grid grid-cols-12 gap-8">
                   {testimonials.map((t) => (
                     <div
@@ -606,28 +577,21 @@ export default function CampsPage() {
 
       <GoldDivider />
 
-      {/* GUEST SPEAKERS */}
+      {/* YOUR HOST */}
       <section
         className="border-b-2"
         style={{ borderColor: 'var(--color-charcoal)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="GUEST SPEAKERS">
-              Taught by people who have <em style={{ fontStyle: 'italic', color: MAROON }}>lived it</em>.
+            <Heading pre="YOUR HOST">
+              Led by someone who has <em style={{ fontStyle: 'italic', color: MAROON }}>lived it</em>.
             </Heading>
             <div className="space-y-24">
-              {speakers.map((s, i) => (
-                <div
-                  key={s.name}
-                  className="grid grid-cols-12 gap-8 items-start"
-                  style={{
-                    borderTop: i === 0 ? 'none' : '1px solid oklch(from var(--color-accent-gold) l c h / 0.25)',
-                    paddingTop: i === 0 ? 0 : 'var(--space-xl)',
-                  }}
-                >
+              {speakers.map((s) => (
+                <div key={s.name} className="grid grid-cols-12 gap-8 items-start">
                   <div className="col-span-12 md:col-span-5 lg:col-span-4 flex justify-center md:justify-start">
-                    <SpeakerVideo src={s.video} poster={s.poster} name={s.name} />
+                    <SpeakerVideo src={s.video} poster={s.poster} name={s.name} aspect={s.aspect} />
                   </div>
                   <div className="col-span-12 md:col-span-7 lg:col-span-8">
                     <h3 className="heading-sm uppercase" style={{ color: 'var(--color-charcoal)', marginBottom: '0.75rem' }}>
@@ -664,7 +628,7 @@ export default function CampsPage() {
         <div className="container-lg">
           <motion.div {...fadeUp}>
             <Heading>
-              Education for the entire <em style={{ fontStyle: 'italic', color: MAROON }}>journey</em>.
+              Everything before <em style={{ fontStyle: 'italic', color: MAROON }}>you sign</em>.
             </Heading>
             <div className="max-w-4xl space-y-6">
               <p className="body-base drop-cap">
@@ -673,10 +637,10 @@ export default function CampsPage() {
                 was missing.
               </p>
               <p className="body-base">
-                At Offense-Defense Football Camps, development happens on the field and off it. Inside the Recruiting and
-                Player Development Symposium, athletes and parents sit down with former college coaches, recruiting
-                coordinators, personnel staff, NIL professionals, and people who have spent their careers inside the game.
-                You leave knowing what to do next, and when to do it.
+                This seminar puts that knowledge in one room. In a focused morning, parents, athletes, and coaches break
+                down how recruiting works right now, from NIL and revenue sharing to roster limits, scholarships, and the
+                timeline by grade, and exactly how to prepare before the December signing period. You leave knowing your
+                next move, and when to make it.
               </p>
             </div>
           </motion.div>
@@ -685,53 +649,23 @@ export default function CampsPage() {
 
       <GoldDivider />
 
-      {/* PLAYER DEVELOPMENT */}
+      {/* AGENDA */}
       <section
         className="border-b-2"
         style={{ borderColor: 'var(--color-charcoal)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="PLAYER DEVELOPMENT">
-              What it takes to play at the <em style={{ fontStyle: 'italic', color: MAROON }}>next level</em>.
+            <Heading pre="THE SEMINAR AGENDA">
+              What we <em style={{ fontStyle: 'italic', color: MAROON }}>cover</em>.
             </Heading>
             <div className="max-w-4xl space-y-6 mb-12">
               <p className="body-base drop-cap">
-                Talent gets an athlete looked at. Habits, character, and preparation are what keep college coaches
-                interested. This session is about closing the gap between the two.
+                Eight sessions plus a bonus, built to take your family from where recruiting stands today to a real
+                signing-day plan.
               </p>
             </div>
-            <div className="mb-12">
-              <p className="text-xs uppercase tracking-wider font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
-                WHAT ATHLETES LEARN
-              </p>
-              <MonoRows
-                items={[
-                  'How college coaches evaluate prospects',
-                  'Building a year-round training plan',
-                  'Leadership and character development',
-                  'Confidence and mental toughness',
-                  'Position-specific expectations at the college level',
-                  'What separates elite athletes from everyone else',
-                ]}
-              />
-            </div>
-            <div>
-              <p className="text-xs uppercase tracking-wider font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
-                TOPICS COVERED
-              </p>
-              <TopicTags
-                tags={[
-                  'Football IQ',
-                  'Leadership',
-                  'Accountability',
-                  'Time Management',
-                  'Academic Success',
-                  'Strength & Conditioning',
-                  'Nutrition & Recovery',
-                ]}
-              />
-            </div>
+            <MonoRows items={agenda} />
           </motion.div>
         </div>
       </section>
@@ -745,7 +679,7 @@ export default function CampsPage() {
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="UNDERSTANDING NCAA RECRUITING">
+            <Heading pre="THE NEW ERA OF RECRUITING">
               The recruiting process, <em style={{ fontStyle: 'italic', color: MAROON }}>explained</em>.
             </Heading>
             <div className="max-w-4xl space-y-6 mb-12">
@@ -756,14 +690,14 @@ export default function CampsPage() {
             </div>
             <div className="mb-16">
               <p className="text-xs uppercase tracking-wider font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
-                WHAT OUR EXPERTS COVER
+                WHAT WE COVER
               </p>
               <MonoRows
                 items={[
                   'When recruiting actually starts',
-                  'How coaches evaluate prospects',
+                  'What coaches really look for',
                   'Official versus unofficial visits',
-                  'Camp and showcase strategy',
+                  'Common recruiting mistakes',
                   'Where the scholarship opportunities are',
                   'Academic requirements and eligibility',
                   'Recruiting timelines by grade level',
@@ -807,7 +741,7 @@ export default function CampsPage() {
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="UNDERSTANDING THE DIVISIONS">
+            <Heading pre="NCAA, NAIA & JUCO OPPORTUNITIES">
               Thousands of paths beyond <em style={{ fontStyle: 'italic', color: MAROON }}>Division I</em>.
             </Heading>
             <div className="grid grid-cols-12 gap-8 mb-16">
@@ -843,21 +777,21 @@ export default function CampsPage() {
 
       <GoldDivider />
 
-      {/* NIL */}
+      {/* NIL & REVENUE SHARING */}
       <section
         className="border-b-2"
         style={{ borderColor: 'var(--color-charcoal)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="NIL EDUCATION">
+            <Heading pre="SCHOLARSHIPS, NIL & REVENUE SHARING">
               Name, image, <em style={{ fontStyle: 'italic', color: MAROON }}>likeness</em>.
             </Heading>
             <div className="max-w-4xl space-y-6 mb-12">
               <p className="body-base drop-cap">
                 A lot of athletes chase NIL before they have done the work that makes NIL possible. We flip the order. NIL
-                opportunities are earned through performance, branding, and reputation, and we show families how to build
-                all three the right way.
+                and revenue-sharing opportunities are earned through performance, branding, and reputation, and we show
+                families how to build all three the right way.
               </p>
             </div>
             <div className="mb-12">
@@ -866,10 +800,10 @@ export default function CampsPage() {
               </p>
               <MonoRows
                 items={[
-                  'What NIL really is, in plain terms',
+                  'What NIL and revenue sharing really are, in plain terms',
+                  'How scholarships actually work',
                   'Building a personal brand',
                   'Monetizing social media responsibly',
-                  'Building real partnerships',
                   'Financial literacy basics',
                   'Protecting your brand and reputation',
                 ]}
@@ -894,13 +828,13 @@ export default function CampsPage() {
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="HIGHLIGHT TAPE WORKSHOP">
+            <Heading pre="BUILDING YOUR RECRUITING PROFILE">
               A film that gets <em style={{ fontStyle: 'italic', color: MAROON }}>watched</em>.
             </Heading>
             <div className="max-w-4xl space-y-6 mb-12">
               <p className="body-base drop-cap">
                 A coach decides in the first thirty seconds whether to keep watching. Most highlight films are too long,
-                poorly organized, and bury the best plays. Our recruiting staff will sit with athletes and fix that.
+                poorly organized, and bury the best plays. This session shows you how to fix that.
               </p>
             </div>
             <div className="mb-12">
@@ -1049,7 +983,7 @@ export default function CampsPage() {
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="PARENT RECRUITING SESSION">
+            <Heading pre="FOR PARENTS">
               What every <em style={{ fontStyle: 'italic', color: MAROON }}>parent</em> should know.
             </Heading>
             <div className="max-w-4xl space-y-6 mb-12">
@@ -1063,10 +997,10 @@ export default function CampsPage() {
                 'How recruiting actually works',
                 'Communicating with college coaches',
                 'The real scholarship landscape',
-                'NIL, explained for parents',
+                'NIL and revenue sharing, explained for parents',
                 'A transfer portal overview',
                 'Academic eligibility requirements',
-                'Financial planning for college',
+                'Financial planning, and saving money during recruiting',
               ]}
             />
           </motion.div>
@@ -1075,26 +1009,27 @@ export default function CampsPage() {
 
       <GoldDivider />
 
-      {/* WHY ATTEND */}
+      {/* WHAT YOU LEAVE WITH — VIP + RESOURCES */}
       <section
         className="border-b-2"
         style={{ borderColor: 'var(--color-charcoal)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="WHY ATTEND O-D">
-              Everything in <em style={{ fontStyle: 'italic', color: MAROON }}>one weekend</em>.
+            <Heading pre="WHAT YOU LEAVE WITH">
+              You leave with a <em style={{ fontStyle: 'italic', color: MAROON }}>plan</em>.
             </Heading>
-            <div className="grid grid-cols-12 gap-x-8 gap-y-0 max-w-4xl">
-              {whyAttend.map((reason) => (
-                <div
-                  key={reason}
-                  className="col-span-12 md:col-span-6 border-t-2 pt-4 pb-4"
-                  style={{ borderColor: 'var(--color-charcoal)' }}
-                >
-                  <p className="text-sm uppercase tracking-wide font-mono">{reason}</p>
-                </div>
-              ))}
+            <div className="mb-12">
+              <p className="text-xs uppercase tracking-wider font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
+                INCLUDED WITH EVERY TICKET
+              </p>
+              <TopicTags tags={includedResources} />
+            </div>
+            <div>
+              <p className="text-xs uppercase tracking-wider font-mono mb-6" style={{ color: MAROON }}>
+                VIP RECRUITING REVIEW · $150
+              </p>
+              <MonoRows items={vipBenefits} />
             </div>
           </motion.div>
         </div>
@@ -1115,8 +1050,8 @@ export default function CampsPage() {
               </div>
               <div className="col-span-12 md:col-span-6 md:pl-8">
                 <p className="body-base mb-8 text-sm" style={{ color: 'var(--color-gray-300)' }}>
-                  The symposium is $50 per athlete, Saturday, July 18 in Houston, and seats are limited. Full refund if
-                  it&apos;s not worth your time — reserve your seat.
+                  {SEMINAR_DATE} in {LOCATION}. Tickets start at $40, and seats are limited. Reserve your family&apos;s
+                  spot before the December signing period.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <a href="#register" className="btn btn-primary uppercase text-xs tracking-wider">
@@ -1136,7 +1071,7 @@ export default function CampsPage() {
         </div>
       </section>
 
-      {/* STICKY CONVERSION BAR — always-visible register CTA (goes straight to checkout) */}
+      {/* STICKY CONVERSION BAR */}
       <div
         style={{
           position: 'fixed',
@@ -1158,17 +1093,17 @@ export default function CampsPage() {
           className="hidden sm:inline"
           style={{ color: 'var(--color-white)', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.02em' }}
         >
-          Recruiting &amp; NIL Symposium · Sat July 18 · Houston · $50
+          Signing Day Recruiting Seminar · Sat Nov 8 · Baton Rouge · From $40
         </span>
         <a
-          href={REGISTER_HOUSTON}
+          href={REGISTER_URL}
           onClick={trackCheckout}
           target="_blank"
           rel="noopener noreferrer"
           className="btn btn-primary uppercase text-xs tracking-wider"
           style={{ whiteSpace: 'nowrap' }}
         >
-          Reserve Your Seat · $50
+          Reserve Your Seat
         </a>
       </div>
     </div>

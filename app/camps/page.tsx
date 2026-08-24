@@ -10,7 +10,7 @@ const MAROON = 'oklch(35% 0.14 22)';
 const REGISTER_URL = 'https://www.tickettailor.com/events/legendarymoves/2359583';
 
 // Event details — edit in one place.
-const SEMINAR_DATE = 'Saturday, November 8, 2026';
+const SEMINAR_DATE = 'Sunday, November 8, 2026';
 const LOCATION = 'Baton Rouge, LA';
 
 const schedule = [
@@ -382,7 +382,20 @@ const sampleBio = [
 ];
 
 /* ---------- testimonials (fill with real quotes; empty = section stays hidden) ---------- */
-const testimonials: { quote: string; name: string; role: string }[] = [];
+const testimonials: { quote: string; name: string; role: string }[] = [
+  {
+    quote:
+      'You not only get an opportunity to come to this seminar, but you get an opportunity to work with experienced coaches.',
+    name: 'Greg Lyons',
+    role: 'Parent',
+  },
+  {
+    quote:
+      'Any parent looking to get their kids into athletics, especially at the next level, this information is invaluable.',
+    name: 'Rodney Johnson',
+    role: 'Parent',
+  },
+];
 
 /* ---------- page ---------- */
 
@@ -599,6 +612,21 @@ export default function CampsPage() {
             <Heading pre="THE TRACK RECORD">
               Guidance that puts athletes <em style={{ fontStyle: 'italic', color: MAROON }}>on the map</em>.
             </Heading>
+            <figure className="mb-10">
+              <div style={{ border: '2px solid var(--color-charcoal)', overflow: 'hidden' }}>
+                <img
+                  src="/images/seminar-room.webp"
+                  alt="Parents and athletes at a Legendary Moves recruiting seminar"
+                  style={{ width: '100%', display: 'block' }}
+                />
+              </div>
+              <figcaption
+                className="text-xs uppercase tracking-wider font-mono mt-3"
+                style={{ color: 'var(--color-gray-600)' }}
+              >
+                A recent Legendary Moves recruiting seminar.
+              </figcaption>
+            </figure>
             <div className="max-w-4xl space-y-6 mb-10">
               <p className="body-base">
                 The people behind this seminar have helped develop and place athletes at every level, from Power Five
@@ -1245,7 +1273,7 @@ export default function CampsPage() {
           className="hidden sm:inline"
           style={{ color: 'var(--color-white)', fontSize: '0.85rem', fontWeight: 600, letterSpacing: '0.02em' }}
         >
-          Signing Day Recruiting Seminar · Sat Nov 8 · Baton Rouge · From $40
+          Signing Day Recruiting Seminar · Sun Nov 8 · Baton Rouge · From $40
         </span>
         <a
           href={REGISTER_URL}

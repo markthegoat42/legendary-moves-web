@@ -65,6 +65,15 @@
   --space-3xl: clamp(4rem, 3rem + 4vw, 7rem);        /* 64-112px - major sections */
   --space-4xl: clamp(6rem, 4rem + 6vw, 10rem);       /* 96-160px - page sections */
 
+  /* Section padding aliases.
+     NOTE: pages were written against --spacing-* but the scale above is --space-*,
+     so these resolved to nothing and every section rendered with ZERO vertical
+     padding. Defining them here restores editorial breathing room site-wide. */
+  --spacing-sm: var(--space-lg);    /* 24px */
+  --spacing-md: var(--space-2xl);   /* 48-80px */
+  --spacing-lg: var(--space-3xl);   /* 64-112px */
+  --spacing-xl: var(--space-4xl);   /* 96-160px */
+
   /* Container */
   --container-max: 75rem;    /* 1200px */
   --text-max: 43.75rem;      /* 700px */
@@ -150,7 +159,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-body);
   font-size: var(--font-size-base);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.7; /* generous editorial leading */
   max-width: 70ch; /* Editorial readability width for deep pages */
 }
 

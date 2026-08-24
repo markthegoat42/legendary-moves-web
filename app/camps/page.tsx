@@ -23,9 +23,33 @@ const VENUE = 'Holiday Inn Baton Rouge – South · 9990 Airline Hwy';
 
 // Matches the flyer: Single $40, Family $90, plus the VIP upsell.
 const pricing = [
-  { tier: 'Single Ticket', price: '$40' },
-  { tier: 'Family Package', price: '$90' },
-  { tier: 'VIP Recruiting Review', price: '$150' },
+  {
+    tier: 'Single Ticket',
+    price: '$40',
+    blurb: 'One seat',
+    includes: ['Full seminar access', 'Recruiting workbook & resources', 'Live Q&A'],
+    popular: false,
+  },
+  {
+    tier: 'Family Package',
+    price: '$90',
+    blurb: 'Bring the whole family',
+    includes: ['Seats for the family', 'Recruiting workbook & resources', 'Live Q&A', 'Best value per person'],
+    popular: true,
+  },
+  {
+    tier: 'VIP Recruiting Review',
+    price: '$150',
+    blurb: 'One-on-one with Coach Scott',
+    includes: [
+      'Everything in general admission',
+      '20-minute private consultation',
+      'Highlight film review',
+      'Social media audit',
+      'Personalized recruiting roadmap',
+    ],
+    popular: false,
+  },
 ];
 
 const faqs = [
@@ -183,10 +207,15 @@ function MonoRows({ items }: { items: string[] }) {
       {items.map((item, i) => (
         <div
           key={item}
-          className={`border-t-2 pt-4 pb-4 ${i === items.length - 1 ? 'border-b-2' : ''}`}
+          className={`border-t-2 pt-6 pb-6 ${i === items.length - 1 ? 'border-b-2' : ''}`}
           style={{ borderColor: 'var(--color-charcoal)' }}
         >
-          <p className="text-sm uppercase tracking-wide font-mono">{item}</p>
+          <p
+            className="font-mono"
+            style={{ fontSize: '1rem', lineHeight: 1.6, letterSpacing: '0.01em', color: 'var(--color-charcoal)' }}
+          >
+            {item}
+          </p>
         </div>
       ))}
     </div>
@@ -567,29 +596,92 @@ export default function CampsPage() {
                   covering NIL, roster limits, scholarships, recruiting strategy, and signing day preparation.
                 </p>
 
-                {/* Pricing */}
-                <p className="text-xs uppercase tracking-wider font-mono mb-4 mt-8" style={{ color: MAROON }}>
-                  Tickets
-                </p>
-                <div className="max-w-md mb-6">
-                  {pricing.map((p, i) => (
-                    <div
-                      key={p.tier}
-                      className={`flex items-center justify-between border-t-2 pt-3 pb-3 ${i === pricing.length - 1 ? 'border-b-2' : ''}`}
-                      style={{ borderColor: 'var(--color-charcoal)' }}
-                    >
-                      <span className="text-sm uppercase tracking-wide font-mono">{p.tier}</span>
-                      <span className="text-sm font-mono font-bold" style={{ color: MAROON }}>{p.price}</span>
-                    </div>
-                  ))}
-                </div>
-
-                <RegisterButton href={REGISTER_URL} label="Reserve Your Seat" />
-                <p className="text-xs mt-4" style={{ color: 'var(--color-gray-600)' }}>
-                  Secure checkout through Ticket Tailor · Seats are limited.
-                </p>
               </div>
             </div>
+
+            {/* PRICING CARDS */}
+            <div className="grid grid-cols-12 gap-6 mt-16">
+              {pricing.map((p) => (
+                <div
+                  key={p.tier}
+                  className="col-span-12 md:col-span-4"
+                  style={{
+                    border: p.popular ? `3px solid ${MAROON}` : '2px solid var(--color-charcoal)',
+                    background: 'var(--color-white)',
+                    padding: '2rem 1.75rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    position: 'relative',
+                  }}
+                >
+                  {p.popular && (
+                    <span
+                      className="text-xs uppercase tracking-wider font-mono"
+                      style={{
+                        position: 'absolute',
+                        top: '-0.85rem',
+                        left: '1.5rem',
+                        background: MAROON,
+                        color: 'var(--color-white)',
+                        padding: '0.3rem 0.85rem',
+                        letterSpacing: '0.1em',
+                      }}
+                    >
+                      Most Popular
+                    </span>
+                  )}
+                  <h4
+                    className="uppercase"
+                    style={{
+                      fontFamily: 'var(--font-body)',
+                      fontSize: '0.8rem',
+                      fontWeight: 700,
+                      letterSpacing: '0.12em',
+                      color: 'var(--color-gray-600)',
+                      marginBottom: '0.75rem',
+                    }}
+                  >
+                    {p.tier}
+                  </h4>
+                  <p
+                    style={{
+                      fontFamily: 'var(--font-editorial)',
+                      fontSize: '3.75rem',
+                      lineHeight: 1,
+                      color: MAROON,
+                      marginBottom: '0.5rem',
+                    }}
+                  >
+                    {p.price}
+                  </p>
+                  <p className="text-sm mb-6" style={{ color: 'var(--color-gray-600)' }}>
+                    {p.blurb}
+                  </p>
+                  <ul className="space-y-3 mb-8" style={{ flexGrow: 1 }}>
+                    {p.includes.map((line) => (
+                      <li
+                        key={line}
+                        style={{
+                          fontFamily: 'var(--font-body)',
+                          fontSize: '1rem',
+                          lineHeight: 1.5,
+                          color: 'var(--color-charcoal)',
+                          paddingLeft: '1.1rem',
+                          position: 'relative',
+                        }}
+                      >
+                        <span style={{ position: 'absolute', left: 0, color: 'var(--color-accent-gold)' }}>·</span>
+                        {line}
+                      </li>
+                    ))}
+                  </ul>
+                  <RegisterButton href={REGISTER_URL} label="Reserve Your Seat" />
+                </div>
+              ))}
+            </div>
+            <p className="text-xs mt-6" style={{ color: 'var(--color-gray-600)' }}>
+              Secure checkout through Ticket Tailor · Seats are limited.
+            </p>
 
             <div className="mt-12 flex flex-wrap items-center gap-4">
               <Link href="/book-a-call" className="btn btn-outline uppercase text-xs tracking-wider">
@@ -668,23 +760,36 @@ export default function CampsPage() {
           >
             <div className="container-lg">
               <motion.div {...fadeUp}>
-                <Heading pre="WHAT PEOPLE SAY">
+                <Heading>
                   In their own <em style={{ fontStyle: 'italic', color: MAROON }}>words</em>.
                 </Heading>
-                <div className="grid grid-cols-12 gap-8">
+                <div className="grid grid-cols-12 gap-x-16 gap-y-16">
                   {testimonials.map((t) => (
-                    <div
+                    <figure
                       key={t.name + t.quote.slice(0, 12)}
-                      className="col-span-12 md:col-span-6 border-t-2 pt-6"
-                      style={{ borderColor: 'var(--color-charcoal)' }}
+                      className="col-span-12 md:col-span-6 border-t-2 pt-8"
+                      style={{ borderColor: 'var(--color-charcoal)', margin: 0 }}
                     >
-                      <p className="body-base" style={{ fontStyle: 'italic', marginBottom: '1rem', color: 'var(--color-charcoal)' }}>
+                      <blockquote
+                        style={{
+                          fontFamily: 'var(--font-editorial)',
+                          fontStyle: 'italic',
+                          fontSize: 'clamp(1.5rem, 2.6vw, 2.125rem)',
+                          lineHeight: 1.35,
+                          color: 'var(--color-charcoal)',
+                          margin: 0,
+                          marginBottom: '1.75rem',
+                        }}
+                      >
                         &ldquo;{t.quote}&rdquo;
-                      </p>
-                      <p className="text-xs uppercase tracking-wider font-mono" style={{ color: 'var(--color-accent-gold)' }}>
-                        {t.name} · {t.role}
-                      </p>
-                    </div>
+                      </blockquote>
+                      <figcaption
+                        className="uppercase font-mono"
+                        style={{ fontSize: '0.8rem', letterSpacing: '0.12em', color: 'var(--color-accent-gold)' }}
+                      >
+                        {t.name} · <span style={{ color: 'var(--color-gray-600)' }}>{t.role}</span>
+                      </figcaption>
+                    </figure>
                   ))}
                 </div>
               </motion.div>
@@ -788,7 +893,34 @@ export default function CampsPage() {
         </div>
       </section>
 
-      <GoldDivider />
+      {/* FULL-BLEED STATEMENT BREAK — resets the scroll rhythm between list-heavy sections */}
+      <section
+        style={{
+          backgroundColor: 'var(--color-navy)',
+          paddingTop: 'var(--spacing-lg)',
+          paddingBottom: 'var(--spacing-lg)',
+        }}
+      >
+        <div className="container-lg">
+          <motion.div {...fadeUp}>
+            <p
+              style={{
+                fontFamily: 'var(--font-editorial)',
+                fontStyle: 'italic',
+                fontSize: 'clamp(2rem, 4.5vw, 3.5rem)',
+                lineHeight: 1.25,
+                color: 'var(--color-white)',
+                maxWidth: '24ch',
+                margin: '0 auto',
+                textAlign: 'center',
+              }}
+            >
+              The film was fine. The athlete was good enough. The{' '}
+              <span style={{ color: 'var(--color-accent-gold)' }}>knowledge</span> was missing.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
       {/* NCAA RECRUITING */}
       <section
@@ -807,9 +939,6 @@ export default function CampsPage() {
               </p>
             </div>
             <div className="mb-16">
-              <p className="text-xs uppercase tracking-wider font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
-                WHAT WE COVER
-              </p>
               <MonoRows
                 items={[
                   'When recruiting actually starts',
@@ -913,9 +1042,6 @@ export default function CampsPage() {
               </p>
             </div>
             <div className="mb-12">
-              <p className="text-xs uppercase tracking-wider font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
-                WHAT FAMILIES LEARN
-              </p>
               <MonoRows
                 items={[
                   'What NIL and revenue sharing really are, in plain terms',
@@ -956,9 +1082,6 @@ export default function CampsPage() {
               </p>
             </div>
             <div className="mb-12">
-              <p className="text-xs uppercase tracking-wider font-mono mb-6" style={{ color: 'var(--color-gray-600)' }}>
-                WHAT WE TEACH
-              </p>
               <MonoRows
                 items={[
                   'The right film length',
@@ -1018,7 +1141,7 @@ export default function CampsPage() {
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="SOCIAL MEDIA RECRUITING">
+            <Heading>
               Your feed is your <em style={{ fontStyle: 'italic', color: MAROON }}>resume</em>.
             </Heading>
             <div className="max-w-4xl space-y-6 mb-12">
@@ -1101,7 +1224,7 @@ export default function CampsPage() {
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="FOR PARENTS">
+            <Heading>
               What every <em style={{ fontStyle: 'italic', color: MAROON }}>parent</em> should know.
             </Heading>
             <div className="max-w-4xl space-y-6 mb-12">
@@ -1134,7 +1257,7 @@ export default function CampsPage() {
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="WHAT YOU LEAVE WITH">
+            <Heading>
               You leave with a <em style={{ fontStyle: 'italic', color: MAROON }}>plan</em>.
             </Heading>
             <div className="mb-12">
@@ -1162,7 +1285,7 @@ export default function CampsPage() {
       >
         <div className="container-lg">
           <motion.div {...fadeUp}>
-            <Heading pre="BEFORE YOU ASK">
+            <Heading>
               Questions, <em style={{ fontStyle: 'italic', color: MAROON }}>answered</em>.
             </Heading>
             <div className="max-w-3xl">

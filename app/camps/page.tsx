@@ -19,12 +19,40 @@ const schedule = [
   { label: 'VIP Q&A', time: '1:00 – 2:00 PM' },
 ];
 
+const VENUE = 'Holiday Inn Baton Rouge – South · 9990 Airline Hwy';
+
+// Matches the flyer: Single $40, Family $90, plus the VIP upsell.
 const pricing = [
-  { tier: 'Early Bird', price: '$40' },
-  { tier: 'General Admission', price: '$60' },
-  { tier: 'Family Pass', price: '$90' },
-  { tier: 'Coach Pass', price: '$50' },
+  { tier: 'Single Ticket', price: '$40' },
+  { tier: 'Family Package', price: '$90' },
   { tier: 'VIP Recruiting Review', price: '$150' },
+];
+
+const faqs = [
+  {
+    q: 'Who is this seminar for?',
+    a: 'Parents of 8th–12th graders, high school coaches, trainers, youth organizations, and transfer portal and JUCO athletes. If your family is thinking about the next level, this is for you.',
+  },
+  {
+    q: 'Should I bring my athlete, or come alone?',
+    a: 'Both benefit. Parents handle the calls, the offers, and the finances, and athletes hear directly what coaches are looking for. Bring your athlete if you can.',
+  },
+  {
+    q: 'Is my athlete too young or too old?',
+    a: 'The seminar is built for 8th grade through seniors, plus transfer portal athletes. Younger athletes are welcome with a parent.',
+  },
+  {
+    q: 'What if I can’t make it?',
+    a: 'Tickets can be refunded or transferred under our refund policy. See the full terms on our Refund Policy page.',
+  },
+  {
+    q: 'Do I need the VIP ticket?',
+    a: 'No. General admission covers the full seminar. The VIP Recruiting Review is an optional upgrade that adds a one-on-one consultation, a film review, a social media audit, and a personalized roadmap.',
+  },
+  {
+    q: 'What should we bring?',
+    a: 'Just yourselves and your questions. Every ticket includes a recruiting workbook and resources to take home.',
+  },
 ];
 
 const agenda = [
@@ -78,6 +106,65 @@ function RegisterButton({ href, label }: { href: string; label: string }) {
     >
       {label}
     </a>
+  );
+}
+
+// Low-friction lead capture for cold traffic not ready to buy.
+// Posts to the same Formspree form as the booking page, labeled by subject.
+function EmailCapture() {
+  const [email, setEmail] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sent' | 'error'>('idle');
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setStatus('idle');
+    try {
+      const res = await fetch('https://formspree.io/f/xkopobeq', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ email, _subject: 'Seminar details request (Baton Rouge)' }),
+      });
+      setStatus(res.ok ? 'sent' : 'error');
+    } catch {
+      setStatus('error');
+    }
+  }
+
+  if (status === 'sent') {
+    return (
+      <p className="body-base" style={{ marginBottom: 0, color: MAROON }}>
+        You&apos;re on the list. We&apos;ll send the details and a reminder before the seminar.
+      </p>
+    );
+  }
+
+  return (
+    <form onSubmit={handleSubmit} className="flex flex-wrap gap-3" style={{ maxWidth: '34rem' }}>
+      <input
+        type="email"
+        required
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        placeholder="you@email.com"
+        aria-label="Email address"
+        style={{
+          flex: '1 1 220px',
+          border: '2px solid var(--color-charcoal)',
+          padding: '0.85rem 1rem',
+          fontFamily: 'var(--font-body)',
+          fontSize: '1rem',
+          background: 'var(--color-white)',
+        }}
+      />
+      <button type="submit" className="btn btn-primary uppercase text-xs tracking-wider">
+        Send Me the Details
+      </button>
+      {status === 'error' && (
+        <p className="text-xs" style={{ color: MAROON, width: '100%' }}>
+          Something went wrong. Please try again, or email info@mylegendarymoves.com.
+        </p>
+      )}
+    </form>
   );
 }
 
@@ -394,7 +481,10 @@ export default function CampsPage() {
               <strong>Tank Dell, Rashee Rice &amp; Courtland Sutton</strong>.
             </p>
             <a
-              href="#register"
+              href={REGISTER_URL}
+              onClick={trackCheckout}
+              target="_blank"
+              rel="noopener noreferrer"
               className="btn-primary inline-block"
               style={{
                 padding: '1rem 2.25rem',
@@ -415,7 +505,7 @@ export default function CampsPage() {
                 marginTop: '0.9rem',
               }}
             >
-              Seats are limited · Early Bird pricing available now.
+              Seats are limited · Recruiting workbook &amp; resources included with every ticket.
             </p>
           </motion.div>
         </div>
@@ -445,9 +535,12 @@ export default function CampsPage() {
                 <p className="text-xs uppercase tracking-wider font-mono mb-2" style={{ color: 'var(--color-accent-gold)' }}>
                   {LOCATION} · ONE DAY ONLY
                 </p>
-                <h3 className="heading-sm uppercase mb-4" style={{ color: 'var(--color-charcoal)' }}>
+                <h3 className="heading-sm uppercase mb-3" style={{ color: 'var(--color-charcoal)' }}>
                   {SEMINAR_DATE}
                 </h3>
+                <p className="text-sm uppercase tracking-wide font-mono mb-5" style={{ color: 'var(--color-charcoal)' }}>
+                  {VENUE}
+                </p>
                 <div className="flex flex-wrap gap-x-8 gap-y-2 mb-6">
                   {schedule.map((s) => (
                     <span key={s.label} className="text-sm uppercase tracking-wide font-mono" style={{ color: 'var(--color-gray-600)' }}>
@@ -480,7 +573,7 @@ export default function CampsPage() {
 
                 <RegisterButton href={REGISTER_URL} label="Reserve Your Seat" />
                 <p className="text-xs mt-4" style={{ color: 'var(--color-gray-600)' }}>
-                  Seats are limited · Venue announced soon.
+                  Secure checkout through Ticket Tailor · Seats are limited.
                 </p>
               </div>
             </div>
@@ -489,9 +582,6 @@ export default function CampsPage() {
               <Link href="/book-a-call" className="btn btn-outline uppercase text-xs tracking-wider">
                 Have Questions? Book a Call
               </Link>
-              <span className="text-sm" style={{ color: 'var(--color-gray-600)' }}>
-                Houston date coming soon.
-              </span>
             </div>
           </motion.div>
         </div>
@@ -1035,6 +1125,62 @@ export default function CampsPage() {
         </div>
       </section>
 
+      <GoldDivider />
+
+      {/* FAQ */}
+      <section
+        className="border-b-2"
+        style={{ borderColor: 'var(--color-charcoal)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
+      >
+        <div className="container-lg">
+          <motion.div {...fadeUp}>
+            <Heading pre="BEFORE YOU ASK">
+              Questions, <em style={{ fontStyle: 'italic', color: MAROON }}>answered</em>.
+            </Heading>
+            <div className="max-w-3xl">
+              {faqs.map((f, i) => (
+                <div
+                  key={f.q}
+                  className={`border-t-2 pt-6 pb-6 ${i === faqs.length - 1 ? 'border-b-2' : ''}`}
+                  style={{ borderColor: 'var(--color-charcoal)' }}
+                >
+                  <h3
+                    className="mb-2"
+                    style={{ fontFamily: 'var(--font-body)', fontWeight: 700, fontSize: '1.1rem', color: 'var(--color-charcoal)' }}
+                  >
+                    {f.q}
+                  </h3>
+                  <p className="body-base" style={{ marginBottom: 0 }}>
+                    {f.a}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </section>
+
+      <GoldDivider />
+
+      {/* EMAIL CAPTURE — cold traffic not ready to buy */}
+      <section
+        className="border-b-2"
+        style={{ borderColor: 'var(--color-charcoal)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}
+      >
+        <div className="container-lg">
+          <motion.div {...fadeUp}>
+            <Heading pre="NOT READY YET?">
+              Get the <em style={{ fontStyle: 'italic', color: MAROON }}>details</em>.
+            </Heading>
+            <p className="body-base mb-8" style={{ maxWidth: '40rem' }}>
+              Drop your email and we&apos;ll send you the seminar details and a reminder before it sells out. No pressure,
+              no spam.
+            </p>
+            <EmailCapture />
+          </motion.div>
+        </div>
+      </section>
+
       {/* FINAL CTA */}
       <section style={{ backgroundColor: 'var(--color-navy)', paddingTop: 'var(--spacing-lg)', paddingBottom: 'var(--spacing-lg)' }}>
         <div className="container-lg">
@@ -1054,7 +1200,13 @@ export default function CampsPage() {
                   spot before the December signing period.
                 </p>
                 <div className="flex flex-wrap gap-4">
-                  <a href="#register" className="btn btn-primary uppercase text-xs tracking-wider">
+                  <a
+                    href={REGISTER_URL}
+                    onClick={trackCheckout}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary uppercase text-xs tracking-wider"
+                  >
                     Reserve Your Seat
                   </a>
                   <Link

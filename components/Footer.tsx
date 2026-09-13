@@ -13,6 +13,7 @@ export default function Footer() {
     { href: '/camps', label: 'Seminar' },
     { href: '/success-stories', label: 'Success Stories' },
     { href: '/book-a-call', label: 'Book a Call' },
+    { href: '/ambassadors', label: 'Ambassadors' },
     { href: '/contact', label: 'Contact' },
   ];
 
